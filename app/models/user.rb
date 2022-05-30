@@ -7,4 +7,7 @@ class User < ApplicationRecord
 
   has_many :donations, class_name: "Pallet", source: :donor
   has_many :shipments
+
+  validates :first_name, presence: true
+  validates :last_name, presence: true
 end
