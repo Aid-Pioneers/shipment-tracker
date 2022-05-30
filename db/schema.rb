@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_30_080156) do
+ActiveRecord::Schema.define(version: 2022_05_30_134806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pallets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "shipment_id", null: false
+    t.string "content"
+    t.string "content_category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shipment_id"], name: "index_pallets_on_shipment_id"
+    t.index ["user_id"], name: "index_pallets_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "scans", force: :cascade do |t|
+    t.bigint "shipment_id", null: false
+    t.string "locatiion"
+    t.boolean "sticker_destroyed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["shipment_id"], name: "index_scans_on_shipment_id"
+  end
+
+  create_table "shipments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "project_id", null: false
+    t.date "start_date"
+    t.date "expected_arrival_date"
+    t.integer "transport_type"
+    t.string "starting_location"
+    t.string "destination_location"
+    t.integer "qr_code_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_shipments_on_project_id"
+    t.index ["user_id"], name: "index_shipments_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,8 +64,16 @@ ActiveRecord::Schema.define(version: 2022_05_30_080156) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "user_type", default: 1
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pallets", "shipments"
+  add_foreign_key "pallets", "users"
+  add_foreign_key "scans", "shipments"
+  add_foreign_key "shipments", "projects"
+  add_foreign_key "shipments", "users"
 end
