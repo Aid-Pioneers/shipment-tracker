@@ -8,6 +8,10 @@ class User < ApplicationRecord
   has_many :donations, class_name: "Pallet", source: :donor
   has_many :shipments
 
+  validates :email,
+            format: { with: /^(.+)@(.+)$/, message: "Email invalid" },
+            uniqueness: { case_sensitive: false },
+            length: { minimum: 4, maximum: 254 }
   validates :first_name, presence: true
   validates :last_name, presence: true
 end
