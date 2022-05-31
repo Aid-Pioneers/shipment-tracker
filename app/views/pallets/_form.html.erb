@@ -1,0 +1,6 @@
+<%= simple_form_for [shipment, pallet] do |f| %>
+  <%= f.input :content %>
+  <%= f.input :content_category, as: :select, collection: Pallet::CATEGORIES %>
+  <%= f.association :donor, collection: User.donor, label_method: :full_name %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
