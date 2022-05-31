@@ -5,4 +5,8 @@ class ShipmentPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def show?
+    user.aidpioneer?
+  end
 end
