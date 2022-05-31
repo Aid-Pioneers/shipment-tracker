@@ -1,2 +1,23 @@
 class ShipmentsController < ApplicationController
+  def new
+    @shipment = Shipment.new
+    authorize @shipment
+  end
+
+  def create
+    @shipment = Shipment.new(shipment_params)
+    authorize @shipment
+    if @shipment.save
+      redirect_to shipment_path(@shipment)
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def shipment_params
+    params.require(:shipment).permit(:project_id, :user_id, :start_date, :expected_arrival_date, :transport_type,
+                                     :starting_location, :destination_location, :qr_code_type)
+  end
 end
