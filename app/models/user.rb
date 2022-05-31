@@ -5,11 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   enum user_type: [:donor, :aidpioneer, :admin]
 
-  has_many :donations, class_name: "Pallet", source: :donor
+  has_many :donations, class_name: "Pallet", foreign_key: "user_id"
   has_many :shipments
 
   validates :email,
-            format: { with: /^(.+)@(.+)$/, message: "Email invalid" },
+            format: { with: /\\A(.+)@(.+)\\z/, message: "Email invalid" },
             uniqueness: { case_sensitive: false },
             length: { minimum: 4, maximum: 254 }
   validates :first_name, presence: true
