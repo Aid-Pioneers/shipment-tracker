@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2022_05_30_134806) do
 
   create_table "scans", force: :cascade do |t|
     t.bigint "shipment_id", null: false
-    t.string "locatiion"
+    t.string "location"
     t.boolean "sticker_destroyed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
