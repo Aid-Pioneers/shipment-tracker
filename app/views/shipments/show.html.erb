@@ -10,6 +10,7 @@
   <% @shipment.pallets.each do |pallet| %>
     <p><%= pallet.content %></p>
   <% end %>
+  <%= link_to "Add new pallet", new_shipment_pallet_path(@shipment), class: "btn btn-primary mb-3" %>
   <h2>Route progress</h2>
   <% @shipment.scans.order(created_at: :desc).each do |scan| %>
     <p><%= scan.location %> <%= scan.created_at %></p>
