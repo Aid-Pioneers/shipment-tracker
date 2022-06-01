@@ -1,6 +1,11 @@
 class ShipmentsController < ApplicationController
   before_action :set_shipment, only: [:show]
 
+  def index
+    if
+      @shipment = Shipment.all # or shipment less old than date x ?
+  end
+
   def new
     @shipment = Shipment.new
     authorize @shipment
