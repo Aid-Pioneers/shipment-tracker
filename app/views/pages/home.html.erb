@@ -1,2 +1,9 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+<!-- <% if current_user.user_type == "aidpioneer" || current_user.user_type == "admin" %>
+  <%= link_to "Start now", shipments_path, class: "btn btn-primary" %> in view = partial for admin
+<% elsif current_user.user_type == "donor" %>
+  <%= link_to "Start now",shipments_path, class: "btn btn-primary" %> - in view partial for donor _donor_index
+<% end %> -->
+
+<%= link_to "Start now", shipments_path, class: "btn btn-primary" %>
