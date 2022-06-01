@@ -22,7 +22,7 @@ Project.create(name: "Syria")
 Project.create(name: "Afghanistan")
 
 puts "--- creating default users ---"
-u = User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.com", password: "123456")
+User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.com", password: "123456")
 # p u.errors.full_messages
 User.create(first_name: "Sophie", last_name: "Sorin", email: "sophie@sorin.com", password: "123456")
 User.create(first_name: "Maria", last_name: "Pigazzi", email: "maria@pigazzi.com", password: "123456")
