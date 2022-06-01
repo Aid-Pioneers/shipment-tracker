@@ -9,4 +9,8 @@ class ShipmentPolicy < ApplicationPolicy
   def create?
     user.aidpioneer?
   end
+
+  def show?
+    user.aidpioneer?
+  end
 end

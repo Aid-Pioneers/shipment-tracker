@@ -1,0 +1,17 @@
+<div class="container">
+  <h1>Shipment</h1>
+  <h2>Details</h2>
+  <p>Start date: <%= @shipment.start_date %></p>
+  <p>End date: <%= @shipment.expected_arrival_date %></p>
+  <p>Starting location: <%= @shipment.starting_location %></p>
+  <p>Destination location: <%= @shipment.destination_location %></p>
+
+  <h2>Pallets</h2>
+  <% @shipment.pallets.each do |pallet| %>
+    <p><%= pallet.content %></p>
+  <% end %>
+  <h2>Route progress</h2>
+  <% @shipment.scans.order(created_at: :desc).each do |scan| %>
+    <p><%= scan.location %> <%= scan.created_at %></p>
+  <% end %>
+</div>
