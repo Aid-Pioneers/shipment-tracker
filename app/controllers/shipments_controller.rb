@@ -1,6 +1,6 @@
 class ShipmentsController < ApplicationController
   before_action :set_shipment, only: [:show]
-  
+
   def new
     @shipment = Shipment.new
     authorize @shipment
@@ -14,6 +14,7 @@ class ShipmentsController < ApplicationController
     else
       render :new
     end
+  end
 
   def show
     authorize @shipment
@@ -24,6 +25,8 @@ class ShipmentsController < ApplicationController
   def shipment_params
     params.require(:shipment).permit(:project_id, :user_id, :start_date, :expected_arrival_date, :transport_type,
                                      :starting_location, :destination_location, :qr_code_type)
+  end
+
   def set_shipment
     @shipment = Shipment.find(params[:id])
   end
