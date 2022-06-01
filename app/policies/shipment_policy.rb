@@ -6,6 +6,10 @@ class ShipmentPolicy < ApplicationPolicy
     # end
   end
 
+  def create?
+    user.aidpioneer?
+  end
+
   def show?
     user.aidpioneer?
   end

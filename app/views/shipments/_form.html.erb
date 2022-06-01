@@ -1,0 +1,11 @@
+<%= simple_form_for(shipment) do |f| %>
+  <%= f.association :project, include_blank: false %>
+  <%= f.association :user, collection: User.aidpioneer, include_blank: false, label_method: :email %>
+  <%= f.input :start_date %>
+  <%= f.input :expected_arrival_date %>
+  <%= f.input :transport_type, as: :select, collection: Shipment.transport_types.keys.to_a, include_blank: false, label_method: :capitalize %>
+  <%= f.input :starting_location %>
+  <%= f.input :destination_location %>
+  <%= f.input :qr_code_type, as: :select, collection: Shipment.qr_code_types.keys.to_a, include_blank: false, label_method: :titleize  %>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
