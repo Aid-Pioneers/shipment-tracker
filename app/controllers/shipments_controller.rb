@@ -17,6 +17,7 @@ class ShipmentsController < ApplicationController
   end
 
   def show
+    # @scans = @shipment.authentic_network? ? helpers.authentic_scans(@shipment.authentic_id) : @shipment.scans
     authorize @shipment
   end
 
