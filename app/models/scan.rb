@@ -1,4 +1,5 @@
 class Scan < ApplicationRecord
+  include Hashid::Rails
   belongs_to :shipment
 
   validates :location, presence: true
