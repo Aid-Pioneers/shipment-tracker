@@ -5,4 +5,8 @@ class PalletPolicy < ApplicationPolicy
     #   scope.all
     # end
   end
+
+  def create?
+    user.aidpioneer? || user.admin?
+  end
 end
