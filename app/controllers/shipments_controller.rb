@@ -21,7 +21,7 @@ class ShipmentsController < ApplicationController
   end
 
   def index
-    @shipments = policy_scope(Shipment).all
+    @shipments = policy_scope(Shipment)
   end
 
   private
