@@ -7,7 +7,7 @@ class Shipment < ApplicationRecord
 
   enum transport_type: [:truck, :train, :plane, :ship]
   enum qr_code_type: [:authentic_network, :regular]
-  enum status: [:in_preperation, :in_transit, :delivered, :problematic]
+  enum status: [:in_preparation, :in_transit, :delivered, :problematic]
 
   validates :qr_code_type, presence: true
 end
