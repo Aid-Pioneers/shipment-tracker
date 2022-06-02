@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :shipments, only: [:index, :show, :new, :create, :edit, :update] do
     resources :pallets, only: [:new, :create, :edit, :update]
     resources :scans, only: [:new, :create]
+    get "qr", to: "shipments#qr"
   end
 
   resources :projects

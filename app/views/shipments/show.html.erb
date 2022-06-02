@@ -5,6 +5,7 @@
   <p>End date: <%= @shipment.expected_arrival_date %></p>
   <p>Starting location: <%= @shipment.starting_location %></p>
   <p>Destination location: <%= @shipment.destination_location %></p>
+  <%= link_to "Download QR Code", shipment_qr_path(@shipment), class: "btn btn-success" %>
 
   <h2>Pallets</h2>
   <% @shipment.pallets.each do |pallet| %>
