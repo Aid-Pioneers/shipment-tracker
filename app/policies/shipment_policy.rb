@@ -1,9 +1,13 @@
 class ShipmentPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      if user.donor?
+        scope.where(user: user)
+      else
+        scope.all
+      end
+    end
   end
 
   def create?

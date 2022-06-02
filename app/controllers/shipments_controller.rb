@@ -20,6 +20,10 @@ class ShipmentsController < ApplicationController
     authorize @shipment
   end
 
+  def index
+    @shipments = policy_scope(Shipment)
+  end
+
   private
 
   def shipment_params
