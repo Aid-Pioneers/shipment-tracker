@@ -1,5 +1,5 @@
 class ShipmentsController < ApplicationController
-  before_action :set_shipment, only: [:show]
+  before_action :set_shipment, only: [:show ]
 
   def new
     @shipment = Shipment.new
@@ -20,8 +20,17 @@ class ShipmentsController < ApplicationController
     authorize @shipment
   end
 
-  def index
+  def index # missing some stuff
     @shipments = policy_scope(Shipment)
+    scans = @shipments.map do |shipment|
+      shipment.scans
+    end.flatten
+    @markers = scans.map do |scan|
+      {
+        lat: scan.latitude,
+        lng: scan.longitude
+      }
+    end
   end
 
   private
