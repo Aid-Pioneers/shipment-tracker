@@ -13,7 +13,10 @@
   </head>
 
   <body>
-    <%= render 'shared/navbar' %>
+  <% if request.path == "/" %>
+    <%= render 'shared/navbar'# fare partial per sidebar e poi else qui render etc %>
+
+  <%end%>
     <%= render 'shared/flashes' %>
 
     <%= yield %>
