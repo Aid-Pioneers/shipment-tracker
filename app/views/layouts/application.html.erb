@@ -16,7 +16,11 @@
   </head>
 
   <body>
+  <% if request.path == "/" %>
     <%= render 'shared/navbar' %>
+  <% else %>
+    <%= render 'shared/sidenav' %>
+  <%end%>
     <%= render 'shared/flashes' %>
 
     <%= yield %>

@@ -42,6 +42,7 @@ puts "--- creating shipments ---"
   a.starting_location = "Berlin"
   a.destination_location = ["Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample
   a.qr_code_type = rand(0..1)
+  a.status = rand(0..3)
   a.save
   p a.errors.full_messages
 end
