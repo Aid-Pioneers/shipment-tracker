@@ -7,5 +7,6 @@
   <%= f.input :starting_location %>
   <%= f.input :destination_location %>
   <%= f.input :qr_code_type, as: :select, collection: Shipment.qr_code_types.keys.to_a, include_blank: false, label_method: :titleize  %>
+  <%= f.input :status, as: :select, collection: Shipment.statuses.keys.to_a, include_blank: false, label_method: :humanize %>
   <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>

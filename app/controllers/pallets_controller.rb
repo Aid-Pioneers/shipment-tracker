@@ -7,13 +7,26 @@ class PalletsController < ApplicationController
   end
 
   def create
-    @pallet = Pallet.new(pallet_params)
-    authorize @pallet
-    @pallet.shipment = @shipment
-    if @pallet.save
+    if params[:count].present? && params[:count].to_i.positive?
+      params[:count].to_i.times do
+        @pallet = Pallet.new(pallet_params)
+        authorize @pallet
+        @pallet.shipment = @shipment
+        unless @pallet.save
+          render :new
+          return
+        end
+      end
       redirect_to shipment_path(@shipment)
     else
-      render :new
+      @pallet = Pallet.new(pallet_params)
+      authorize @pallet
+      @pallet.shipment = @shipment
+      if @pallet.save
+        redirect_to shipment_path(@shipment)
+      else
+        render :new
+      end
     end
   end
 
