@@ -5,6 +5,10 @@ $soft-grey: #FAFAFA;
 $pastel-yellow: #FDF7D8;
 $yellow: #FED330;
 $white: #FFFFFF;
+$green: #008000;
+$light-green: #AAF683;
+$red: #800F2F;
+$light-red: #FFCCD5;
 
 * {
   font-family: 'Poppins', sans-serif;
@@ -23,12 +27,27 @@ $white: #FFFFFF;
   background-color: $white;
 }
 
-.btn-tabs {
-  color: $pastel-yellow;
+.btn-tabs-all {
+  color: $white;
   padding: 8px 24px;
   border-radius: 50px;
   background: $yellow;
   transition: background 0.3s ease;
+  width: 60px;
+  height: 32px;
+  font-size: 12px;
+}
+
+.btn-tabs {
+  color: $yellow;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $white;
+  transition: background 0.3s ease;
+  border: 2px solid $yellow;
+  width: 60px;
+  height: 32px;
+  font-size: 12px;
 }
 
 .btn-active {
@@ -39,11 +58,27 @@ $white: #FFFFFF;
   transition: background 0.3s ease;
 }
 
-.btn-passive {
+.btn-in-preparation {
   color: $dark-grey;
   padding: 8px 24px;
   border-radius: 50px;
   background: $soft-grey;
+  transition: background 0.3s ease;
+}
+
+.btn-delivered {
+  color: $green;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $light-green;
+  transition: background 0.3s ease;
+}
+
+.btn-problem {
+  color: $red;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $light-red;
   transition: background 0.3s ease;
 }
 

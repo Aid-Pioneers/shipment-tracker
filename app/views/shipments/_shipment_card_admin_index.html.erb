@@ -1,11 +1,27 @@
+<% shipments.each do |shipment| %>
+  <div class="card-product m-2 p-4 border-0 shadow rounded">
+  <div class="d-flex justify-content-between">
+    <div class="card-infos d-flex flex-column">
+        <p><%= shipment.all_donors %></p>
+        <p class="ship_id_num"><%= shipment.id %></p>
+      </div>
+      <div class="card-infos d-flex flex-column">
+        <p class="btn-active"><strong><%=shipment.status%></strong></p>
+        <p><%= shipment.pallets.count%> pallets</p>
+        # ifelse pallet or pallets
+      </div>
+    </div>
 
-<%# Font Awesome Truck Icon
-<i class="fa-solid fa-truck"></i> %>
+    <div class="d-flex flex-column">
+      <div class="card-infos d-flex flex-column justify-content-between">
+        <div class="d-flex justify-contents-evenly">
+          <p>Last scan</p> <p> | </p> <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
+        </div>
+        <div class="d-flex justify-contents-evenly">
+          <p>Location<p> <p> | </p> <p><%= shipment.scans.last.location %></p>
+        </div>
+      </div>
 
-<div class="card-product">
-  <i class="fa-solid fa-truck"></i>
-  <div class="card-product-infos">
-    <h2>Product name</h2>
-    <p>Product description with <strong>relevant info</strong> only.</p>
+    </div>
   </div>
-</div>
+<% end %>

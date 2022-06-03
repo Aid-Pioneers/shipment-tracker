@@ -1,4 +1,4 @@
-<div class="body-container">
+<div class="body-container" data-controller="update-shipments">
   <div class="row">
     <div class="d-flex">
         <div class="col-2 mt-5">
@@ -16,38 +16,19 @@
             <h1>Shipments<h1>
           </div>
           <div class="d-flex justify-content-evenly">
-            <h5 class="btn-tabs">All</h5>
-            <h5 class="btn-tabs">Active</h5>
-            <h5 class="btn-tabs">Delivered</h5>
-            <h5 class="btn-tabs">Check Finn others</h5>
+            <h5 class="btn-tabs-all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
+            <h5 class="btn-tabs" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
+            <h5 class="btn-tabs" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
+            <h5 class="btn-tabs" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
+            <h5 class="btn-tabs" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
+            # ifelse show only cards according to the status we CLICK ON
+            # event on click? and then if/else
           </div>
             <br>
-              <% shipments.each do |shipment| %>
-                <div class="card-product m-2 p-4 border-0 shadow rounded">
-                <div class="d-flex justify-content-between">
-                  <div class="card-infos d-flex flex-column">
-                      <p><%= shipment.all_donors %></p>
-                      <p class="ship_id_num"><%= shipment.id %></p>
-                    </div>
-                    <div class="card-infos d-flex flex-column">
-                      <p class="btn-active"><strong>Active#UPDATE</strong></p>
-                      <p>Donation#-test</p>
-                    </div>
-                  </div>
 
-                  <div class="d-flex flex-column">
-                    <div class="card-infos d-flex flex-column justify-content-between">
-                      <div class="d-flex justify-contents-evenly">
-                        <p>Last scan</p> <p> | </p> <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
-                      </div>
-                      <div class="d-flex justify-contents-evenly">
-                        <p>Location<p> <p> | </p> <p><%= shipment.scans.last.location %></p>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              <% end %>
+            <div data-update-shipments-target="list">
+              <%= render "shipment_card_admin_index", shipments: shipments %>
+            </div>
         </div>
 
         <div class="col-5 mt-5">
