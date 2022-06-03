@@ -28,7 +28,7 @@ class ShipmentsController < ApplicationController
 
   def shipment_params
     params.require(:shipment).permit(:project_id, :user_id, :start_date, :expected_arrival_date, :transport_type,
-                                     :starting_location, :destination_location, :qr_code_type)
+                                     :starting_location, :destination_location, :qr_code_type, :status)
   end
 
   def set_shipment
