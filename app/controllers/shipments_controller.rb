@@ -1,3 +1,4 @@
+require 'rqrcode'
 class ShipmentsController < ApplicationController
   before_action :set_shipment, only: [:show ]
 
