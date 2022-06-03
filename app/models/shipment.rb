@@ -10,4 +10,16 @@ class Shipment < ApplicationRecord
   enum status: [:in_preparation, :in_transit, :delivered, :problematic]
 
   validates :qr_code_type, presence: true
+
+  def all_donors
+    donors = pallets.map do |pallet|
+      pallet.donor.full_name
+    end
+
+    if donors.uniq.size < 2
+      donors.first
+    else
+      donors.uniq.join(", ")[0..20] + "..."
+    end
+  end
 end
