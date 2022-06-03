@@ -1,3 +1,4 @@
+require 'rqrcode'
 class ShipmentsController < ApplicationController
   before_action :set_shipment, only: [:show ]
 
@@ -31,6 +32,12 @@ class ShipmentsController < ApplicationController
         lng: scan.longitude
       }
     end
+  end
+
+  def qr
+    @shipment = Shipment.find(params[:shipment_id])
+    authorize @shipment
+    send_data RQRCode::QRCode.new(new_shipment_scan_url(@shipment)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
   end
 
   private
