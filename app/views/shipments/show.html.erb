@@ -13,6 +13,15 @@
   <% end %>
   <%= link_to "Add new pallet", new_shipment_pallet_path(@shipment), class: "btn btn-primary mb-3" %>
   <h2>Route progress</h2>
+  <div class="col-5 mt-5">
+      <div class="text-center">
+        <h5>Track active shipments on map</h5>
+        <div class="position-sticky" style="width: 100%; height: 700px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+  </div>
   <% @shipment.scans.order(created_at: :desc).each do |scan| %>
     <p><%= scan.location %> <%= scan.created_at %></p>
   <% end %>

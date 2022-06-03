@@ -19,6 +19,12 @@ class ShipmentsController < ApplicationController
 
   def show
     authorize @shipment
+    @markers = @shipment.scans.map do |scan|
+      {
+        lat: scan.latitude,
+        lng: scan.longitude
+      }
+    end
   end
 
   def index # missing some stuff
