@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2022_06_02_142626) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "date"
+    t.float "latitude"
+    t.float "longitude"
     t.index ["shipment_id"], name: "index_scans_on_shipment_id"
   end
 
