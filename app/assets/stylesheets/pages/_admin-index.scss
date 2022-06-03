@@ -23,6 +23,14 @@ $white: #FFFFFF;
   background-color: $white;
 }
 
+.btn-tabs {
+  color: $pastel-yellow;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $yellow;
+  transition: background 0.3s ease;
+}
+
 .btn-active {
   color: $yellow;
   padding: 8px 24px;

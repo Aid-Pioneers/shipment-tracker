@@ -15,7 +15,12 @@
           <div class="row d-flex text-align-start mb-2">
             <h1>Shipments<h1>
           </div>
-            <h5>Buttons for the different tabs</h5>
+          <div class="d-flex justify-content-evenly">
+            <h5 class="btn-tabs">All</h5>
+            <h5 class="btn-tabs">Active</h5>
+            <h5 class="btn-tabs">Delivered</h5>
+            <h5 class="btn-tabs">Check Finn others</h5>
+          </div>
             <br>
               <% shipments.each do |shipment| %>
                 <div class="card-product m-2 p-4 border-0 shadow rounded">
