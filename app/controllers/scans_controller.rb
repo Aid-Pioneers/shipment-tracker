@@ -9,9 +9,12 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
+    @shipment = Shipment.find(params[:shipment_id])
+    @scan.shipment = @shipment
+    @scan.date = DateTime.now
     authorize @scan
     if @scan.save
-      redirect_to scan_path(@scan)
+      redirect_to root_path
     else
       render :new
     end
