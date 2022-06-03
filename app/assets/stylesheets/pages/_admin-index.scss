@@ -1,0 +1,57 @@
+$rich-black: #051224;
+$dark-grey: #9198A3;
+$grey: #F1F1F1;
+$soft-grey: #FAFAFA;
+$pastel-yellow: #FDF7D8;
+$yellow: #FED330;
+$white: #FFFFFF;
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+.body-container {
+  margin: 0 20px;
+}
+
+.shipment-cards {
+  margin: 20px;
+  font-size: 13px;
+}
+
+.card-product {
+  background-color: $white;
+}
+
+.btn-tabs {
+  color: $pastel-yellow;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $yellow;
+  transition: background 0.3s ease;
+}
+
+.btn-active {
+  color: $yellow;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $pastel-yellow;
+  transition: background 0.3s ease;
+}
+
+.btn-passive {
+  color: $dark-grey;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $soft-grey;
+  transition: background 0.3s ease;
+}
+
+.h1 {
+  font-weight: bold;
+}
+
+
+// .fa-truck {
+//   font-size: 40px;
+// }

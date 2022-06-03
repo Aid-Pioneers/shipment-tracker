@@ -42,6 +42,7 @@ puts "--- creating shipments ---"
   a.starting_location = "Berlin"
   a.destination_location = ["Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample
   a.qr_code_type = rand(0..1)
+  a.status = rand(0..3)
   a.save
   p a.errors.full_messages
 end
@@ -64,7 +65,10 @@ puts "--- creating scans ---"
  s = Scan.new
  s.shipment = Shipment.all.sample
  s.date = s.shipment.start_date + rand(0..4).days + rand(0..12).hours + + rand(0..60).minutes
- s.location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
+ location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
+  coords = Geocoder.search(location).first.coordinates
+  s.latitude = coords[0]
+  s.longitude = coords[1]
  s.sticker_destroyed = 0 # just leaving it false for now
  s.save
  p s.errors.full_messages
