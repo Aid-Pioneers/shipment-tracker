@@ -23,6 +23,6 @@
       </div>
   </div>
   <% @shipment.scans.order(created_at: :desc).each do |scan| %>
-    <p><%= scan.location %> <%= scan.created_at %></p>
+    <p><%= scan.location %> <%= scan.date.strftime("%F %R") %></p>
   <% end %>
 </div>
