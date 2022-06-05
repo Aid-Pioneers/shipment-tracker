@@ -14,9 +14,15 @@ class ScansController < ApplicationController
     @scan.date = DateTime.now
     authorize @scan
     if @scan.save
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to shipment_path(@shipment) }
+        format.json { render json: @scan }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @scan.errors, status: :unprocessable_entity }
+      end
     end
   end
 
