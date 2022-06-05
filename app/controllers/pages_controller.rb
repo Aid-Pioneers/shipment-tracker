@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   end
 
   def donations
-    @shipments = Shipment.includes(:scans).order(id: :desc)
+    @shipments = current_user.donations.includes(shipment: :scans).order(shipment_id: :desc).map(&:shipment).uniq
     @donations = current_user.donations
   end
 end
