@@ -62,6 +62,7 @@ class ShipmentsController < ApplicationController
     else
       render :edit
     end
+  end
 
   def qr
     @shipment = Shipment.find(params[:shipment_id])
