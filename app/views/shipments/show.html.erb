@@ -17,9 +17,9 @@
       <div class="text-center">
         <h5>Track active shipments on map</h5>
         <div class="position-sticky" style="width: 100%; height: 700px;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        data-controller="mapbox-show"
+        data-mapbox-show-markers-value="<%= @markers.to_json %>"
+        data-mapbox-show-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       </div>
   </div>
   <% @shipment.scans.order(created_at: :desc).each do |scan| %>

@@ -10,4 +10,5 @@ class Shipment < ApplicationRecord
   enum status: [:in_preparation, :in_transit, :delivered, :problematic]
 
   validates :qr_code_type, presence: true
+  SHIPMENT_STATUS = { "in_preparation" => "location_in_preparation.svg", "in_transit" => "location_in_transit.svg", "delivered" => "location_delivered.svg", "problematic" => "location_problem.svg" }
 end

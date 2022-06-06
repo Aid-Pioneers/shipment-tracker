@@ -22,7 +22,8 @@ class ShipmentsController < ApplicationController
     @markers = @shipment.scans.map do |scan|
       {
         lat: scan.latitude,
-        lng: scan.longitude
+        lng: scan.longitude,
+        image_url: helpers.asset_url("location_in_transit.svg")
       }
     end
   end
@@ -35,7 +36,9 @@ class ShipmentsController < ApplicationController
     @markers = scans.map do |scan|
       {
         lat: scan.latitude,
-        lng: scan.longitude
+        lng: scan.longitude,
+        image_url: helpers.asset_url(Shipment::SHIPMENT_STATUS[scan.shipment.status]),
+        href: shipment_path(scan.shipment)
       }
     end
   end
