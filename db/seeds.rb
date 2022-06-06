@@ -22,7 +22,7 @@ Project.create(name: "Syria")
 Project.create(name: "Afghanistan")
 
 puts "--- creating default users ---"
-u = User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.com", password: "123456")
+User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.com", password: "123456")
 # p u.errors.full_messages
 User.create(first_name: "Sophie", last_name: "Sorin", email: "sophie@sorin.com", password: "123456")
 User.create(first_name: "Maria", last_name: "Pigazzi", email: "maria@pigazzi.com", password: "123456")
@@ -62,14 +62,11 @@ end
 
 puts "--- creating scans ---"
 40.times do
- s = Scan.new
- s.shipment = Shipment.all.sample
- s.date = s.shipment.start_date + rand(0..4).days + rand(0..12).hours + + rand(0..60).minutes
- location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
-  coords = Geocoder.search(location).first.coordinates
-  s.latitude = coords[0]
-  s.longitude = coords[1]
- s.sticker_destroyed = 0 # just leaving it false for now
- s.save
- p s.errors.full_messages
+  s = Scan.new
+  s.shipment = Shipment.all.sample
+  s.date = s.shipment.start_date + rand(0..4).days + rand(0..12).hours + + rand(0..60).minutes
+  s.location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
+  s.sticker_destroyed = 0 # just leaving it false for now
+  s.save
+  p s.errors.full_messages
 end

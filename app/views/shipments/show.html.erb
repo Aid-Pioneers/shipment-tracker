@@ -5,6 +5,7 @@
   <p>End date: <%= @shipment.expected_arrival_date %></p>
   <p>Starting location: <%= @shipment.starting_location %></p>
   <p>Destination location: <%= @shipment.destination_location %></p>
+  <%= link_to "Download QR Code", shipment_qr_path(@shipment), class: "btn btn-success" %>
 
   <h2>Pallets</h2>
   <% @shipment.pallets.each do |pallet| %>
@@ -12,7 +13,16 @@
   <% end %>
   <%= link_to "Add new pallet", new_shipment_pallet_path(@shipment), class: "btn btn-primary mb-3" %>
   <h2>Route progress</h2>
-  <% @shipment.scans.order(created_at: :desc).each do |scan| %>
-    <p><%= scan.location %> <%= scan.created_at %></p>
+  <div class="col-5 mt-5">
+      <div class="text-center">
+        <h5>Track active shipments on map</h5>
+        <div class="position-sticky" style="width: 100%; height: 700px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+  </div>
+  <% @shipment.scans.each do |scan| %>
+    <p><%= scan.location %> <%= scan.date.strftime("%F %R") %></p>
   <% end %>
 </div>

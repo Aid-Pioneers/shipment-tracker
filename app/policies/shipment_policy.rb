@@ -17,4 +17,8 @@ class ShipmentPolicy < ApplicationPolicy
   def show?
     user.aidpioneer?
   end
+
+  def qr?
+    user.aidpioneer?
+  end
 end
