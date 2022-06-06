@@ -16,13 +16,17 @@
   </head>
 
   <body>
-  <% if request.path == "/" %>
-    <%= render 'shared/navbar' %>
-  <% else %>
-    <%= render 'shared/sidenav' %>
-  <%end%>
+    <% if request.path == "/users/sign_in" || request.path == "/users/sign_up"%>
+      <%= yield %>
+    <% elsif request.path == "/"  %>
+      <%= render 'shared/navbar' %>
+      <%= yield %>
+    <% else %>
+      <div class="common-div">
+        <%= render 'shared/sidenav' %>
+        <%= yield %>
+      </div>
+    <%end%>
     <%= render 'shared/flashes' %>
-
-    <%= yield %>
   </body>
 </html>

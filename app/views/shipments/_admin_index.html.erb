@@ -1,70 +1,57 @@
-<div class="body-container">
-  <div class="row">
-    <div class="d-flex">
-        <div class="col-2 mt-5">
-            <p>Vertical</p>
-            <br>
-            <p>Navbar</p>
-            <br>
-            <p>will be</p>
-            <br>
-            <p>here</p>
-        </div>
-
-        <div class="col-5 shipment-cards m-2">
-          <div class="row d-flex text-align-start mb-2">
-            <h1>Shipments<h1>
-          </div>
-          <div class="d-flex justify-content-evenly">
-            <h5 class="btn-tabs">All</h5>
-            <h5 class="btn-tabs">Active</h5>
-            <h5 class="btn-tabs">Delivered</h5>
-            <h5 class="btn-tabs">Check Finn others</h5>
-          </div>
-            <br>
-              <% shipments.each do |shipment| %>
-                <div class="card-product m-2 p-4 border-0 shadow rounded">
-                <div class="d-flex justify-content-between">
-                  <div class="card-infos d-flex flex-column">
-                      <p><strong>Shipment number</strong></p>
-                      <p><%= shipment.id %></p>
-                    </div>
-                    <div class="card-infos d-flex flex-column">
-                      <p class="btn-active"><strong>Active#UPDATE</strong></p>
-                      <p>Donation#-test</p>
-                    </div>
-                  </div>
-
-                  <div class="d-flex flex-column">
-                    <div class="card-infos d-flex justify-content-between">
-                      <p><%= shipment.start_date.strftime("%a %e %B")%></p>
-                      <p><%= shipment.starting_location %></p>
-                    </div>
-                    <div class="card-infos d-flex justify-content-between">
-                      <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
-                      <p><%= shipment.scans.last.location %></p>
-                    </div>
-                    <div class="card-infos d-flex justify-content-between">
-                      <p><%= shipment.expected_arrival_date.strftime("%a %e %B")%></p>
-                      <p><%= shipment.destination_location %></p>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-        </div>
-
-        <div class="col-5 mt-5">
-            <div class="text-center">
-              <h5>Track active shipments on map</h5>
-              <div class="position-sticky" style="width: 100%; height: 700px;"
-              data-controller="mapbox"
-              data-mapbox-markers-value="<%= @markers.to_json %>"
-              data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-            </div>
-        </div>
+<div class="d-flex cards">
+  <div class="shipment-cards m-2">
+    <div class="row d-flex text-align-start mb-2">
+      <h1>Shipments<h1>
     </div>
+    <div class="d-flex justify-content-evenly">
+      <h5 class="btn-tabs">All</h5>
+      <h5 class="btn-tabs">Active</h5>
+      <h5 class="btn-tabs">Delivered</h5>
+      <h5 class="btn-tabs">Check Finn others</h5>
+    </div>
+    <br>
+    <% shipments.each do |shipment| %>
+      <div class="card-product m-2 p-4 border-0 shadow rounded">
+      <div class="d-flex justify-content-between">
+        <div class="card-infos d-flex flex-column">
+            <p><strong>Shipment number</strong></p>
+            <p><%= shipment.id %></p>
+          </div>
+          <div class="card-infos d-flex flex-column">
+            <p class="btn-active"><strong>Active#UPDATE</strong></p>
+            <p>Donation#-test</p>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column">
+          <div class="card-infos d-flex justify-content-between">
+            <p><%= shipment.start_date.strftime("%a %e %B")%></p>
+            <p><%= shipment.starting_location %></p>
+          </div>
+          <div class="card-infos d-flex justify-content-between">
+            <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
+            <p><%= shipment.scans.last.location %></p>
+          </div>
+          <div class="card-infos d-flex justify-content-between">
+            <p><%= shipment.expected_arrival_date.strftime("%a %e %B")%></p>
+            <p><%= shipment.destination_location %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-5">
+      <div class="text-center">
+        <h5>Track active shipments on map</h5>
+        <div class="position-sticky" style="width: 100%; height: 700px;"
+        data-controller="mapbox"
+        data-mapbox-markers-value="<%= @markers.to_json %>"
+        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
   </div>
 </div>
+
 
 <%# <div class="truck-logo bg-info">
  <i class="fa-solid fa-truck"></i>
