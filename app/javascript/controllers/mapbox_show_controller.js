@@ -12,8 +12,8 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10",
-      interactive: false
+      style: "mapbox://styles/mapbox/streets-v10"
+      // interactive: false
     })
 
     this.#addMarkersToMap()
@@ -46,8 +46,8 @@ export default class extends Controller {
       'line-cap': 'round'
       },
       'paint': {
-      'line-color': '#000',
-      'line-width': 2
+      'line-color': '#9198a3',
+      'line-width': 1
       }
       });
       });
@@ -74,12 +74,7 @@ export default class extends Controller {
         .setLngLat([marker.lng, marker.lat])
         // .setPopup(popup)
         .addTo(this.map)
-
-      })
-      new mapboxgl.Marker()
-        .setLngLat([marker.lng, marker.lat])
-        // .setPopup(popup)
-        .addTo(this.map)
+    })
   }
 
   #fitMapToMarkers() {
