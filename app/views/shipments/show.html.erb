@@ -9,7 +9,9 @@
 
   <h2>Pallets</h2>
   <% @shipment.pallets.each do |pallet| %>
-    <p><%= pallet.content %></p>
+    <p>Pallet content: <%= pallet.content %></p>
+    <%= link_to "Edit", edit_shipment_pallet_path(@shipment, pallet), class: "btn btn-primary mb-3" %>
+    <%= link_to "Delete", shipment_pallet_path(@shipment, pallet), method: :destroy, data: { confirm: "Are you sure?" }, class: "btn btn-primary mb-3" %>
   <% end %>
   <%= link_to "Add new pallet", new_shipment_pallet_path(@shipment), class: "btn btn-primary mb-3" %>
   <h2>Route progress</h2>
