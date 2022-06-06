@@ -12,13 +12,13 @@ $light-red: #FFCCD5;
 $green-success: #5cb85c;
 $red-danger: #d9534f;
 
-* {
+.body-container {
   font-family: 'Poppins', sans-serif;
   color: $dark-grey;
 }
 
-.h1 {
-  ship-title: 800;
+.ship-title {
+  font-weight: 700;
 }
 
 .ship-donor {
@@ -131,9 +131,8 @@ $red-danger: #d9534f;
 }
 
 .map-text {
-  font-weight: 800;
+  font-weight: 700;
 }
-
 
 
 // .fa-truck {
