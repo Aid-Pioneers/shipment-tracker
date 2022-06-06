@@ -3,6 +3,11 @@ class Scan < ApplicationRecord
 
   validates_inclusion_of :sticker_destroyed, in: [true, false]
 
-  reverse_geocoded_by :latitude, :longitude, address: :location
-  after_validation :reverse_geocode, if: :will_save_change_to_latitude?
+  geocoded_by :location
+  reverse_geocoded_by :latitude, :longitude do |obj, results|
+    if geo = results.find { |result| result.city && result.country }
+      obj.location = "#{geo.city}, #{geo.country}"
+    end
+  end
+  after_validation :geocode, :reverse_geocode
 end

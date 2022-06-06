@@ -22,7 +22,7 @@
         data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
       </div>
   </div>
-  <% @shipment.scans.order(created_at: :desc).each do |scan| %>
-    <p><%= scan.location %> <%= scan.created_at %></p>
+  <% @shipment.scans.each do |scan| %>
+    <p><%= scan.location %> <%= scan.date.strftime("%F %R") %></p>
   <% end %>
 </div>
