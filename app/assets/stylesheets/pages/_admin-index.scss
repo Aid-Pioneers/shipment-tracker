@@ -5,9 +5,32 @@ $soft-grey: #FAFAFA;
 $pastel-yellow: #FDF7D8;
 $yellow: #FED330;
 $white: #FFFFFF;
+$green: #008000;
+$light-green: #AAF683;
+$red: #800F2F;
+$light-red: #FFCCD5;
+$green-success: #5cb85c;
+$red-danger: #d9534f;
 
-* {
+.body-container {
   font-family: 'Poppins', sans-serif;
+  color: $dark-grey;
+}
+
+.ship-title {
+  font-weight: 700;
+}
+
+.ship-donor {
+  font-size: 18px;
+}
+
+.ship-id-num {
+  font-size: 24px;
+}
+
+.ship-pallet-count {
+  font-size: 18px;
 }
 
 .body-container {
@@ -23,12 +46,27 @@ $white: #FFFFFF;
   background-color: $white;
 }
 
-.btn-tabs {
-  color: $pastel-yellow;
+.btn-tabs-all {
+  color: $white;
   padding: 8px 24px;
   border-radius: 50px;
   background: $yellow;
   transition: background 0.3s ease;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-tabs {
+  color: $yellow;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $white;
+  transition: background 0.3s ease;
+  border: 1px solid $yellow;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-active {
@@ -37,18 +75,63 @@ $white: #FFFFFF;
   border-radius: 50px;
   background: $pastel-yellow;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
 
-.btn-passive {
+.btn-in-preparation {
   color: $dark-grey;
   padding: 8px 24px;
   border-radius: 50px;
   background: $soft-grey;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
 
-.h1 {
+.btn-delivered {
+  color: $green;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $light-green;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
   font-weight: bold;
+}
+
+.btn-problem {
+  color: $red;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $light-red;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-worker {
+  color: $dark-grey;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $white;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid $grey;
+}
+
+.map-text {
+  font-weight: 700;
 }
 
 

@@ -37,6 +37,16 @@ class ShipmentsController < ApplicationController
         lng: scan.longitude
       }
     end
+
+    if params[:query].present? && params[:query] != "all"
+      @shipments = @shipments.where(status: params[:query])
+    end
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'shipments/shipment_card_admin_index', locals: { shipments: @shipments }, formats: [:html] }
+    end
+
   end
 
   def qr
