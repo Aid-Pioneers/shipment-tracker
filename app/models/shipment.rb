@@ -18,6 +18,8 @@ class Shipment < ApplicationRecord
 
     if donors.uniq.size < 2
       donors.first
+    elsif donors.size < 1
+      ""
     else
       donors.uniq.join(", ")[0..20] + "..."
     end

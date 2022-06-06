@@ -9,6 +9,8 @@ $green: #008000;
 $light-green: #AAF683;
 $red: #800F2F;
 $light-red: #FFCCD5;
+$green-success: #5cb85c;
+$red-danger: #d9534f;
 
 * {
   font-family: 'Poppins', sans-serif;
@@ -85,11 +87,6 @@ $light-red: #FFCCD5;
 .h1 {
   font-weight: bold;
 }
-
-.ship-id-num {
-  font-weight: bold;
-}
-
 
 // .fa-truck {
 //   font-size: 40px;

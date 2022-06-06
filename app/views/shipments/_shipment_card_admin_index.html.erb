@@ -6,19 +6,34 @@
         <p class="ship_id_num"><%= shipment.id %></p>
       </div>
       <div class="card-infos d-flex flex-column">
+      # according to shipment status, put a different button
+        <% if shipment.status == "in_preparation" %>
+          <p> # add css button "in_preparation" </p>
+        <% elsif shipment.status == "in_transit" %>
+          <p> # add css button "in_transit(active)" </p>
+        <% elsif shipment.status == "delivered" %>
+          <p> # add css button "delivered" </p>
+        <% elsif shipment.status == "problematic" %>
+          <p> # add css button "problematic" </p>
+        <% end %>
         <p class="btn-active"><strong><%=shipment.status%></strong></p>
         <p><%= shipment.pallets.count%> pallets</p>
-        # ifelse pallet or pallets
       </div>
     </div>
 
     <div class="d-flex flex-column">
       <div class="card-infos d-flex flex-column justify-content-between">
         <div class="d-flex justify-contents-evenly">
-          <p>Last scan</p> <p> | </p> <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
+          <% unless shipment.scans.empty? %>
+            <p>Last scan</p> <p> | </p> <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
+          <% end %>
         </div>
         <div class="d-flex justify-contents-evenly">
-          <p>Location<p> <p> | </p> <p><%= shipment.scans.last.location %></p>
+          <% if shipment.scans.empty? %>
+           <p> There is no scan yet for this shipment! </p>
+          <% else %>
+            <p>Location<p> <p> | </p> <p><%= shipment.scans.last.location %></p>
+          <% end %>
         </div>
       </div>
 
