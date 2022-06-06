@@ -16,6 +16,8 @@
     </div>
   </div>
   <div>
-    <a href="#" class="btn btn-logout"><%= image_tag "logout.png", class: "btn-img" %>Log out</a>
+    <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-logout" do  %>
+      <%= image_tag "logout.png", class: "btn-img" %>Log out
+    <% end %>
   </div>
 </div>
