@@ -14,6 +14,23 @@ $red-danger: #d9534f;
 
 * {
   font-family: 'Poppins', sans-serif;
+  color: $dark-grey;
+}
+
+.h1 {
+  ship-title: 800;
+}
+
+.ship-donor {
+  font-size: 18px;
+}
+
+.ship-id-num {
+  font-size: 24px;
+}
+
+.ship-pallet-count {
+  font-size: 18px;
 }
 
 .body-container {
@@ -35,9 +52,9 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $yellow;
   transition: background 0.3s ease;
-  width: 60px;
-  height: 32px;
   font-size: 12px;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-tabs {
@@ -46,10 +63,10 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $white;
   transition: background 0.3s ease;
-  border: 2px solid $yellow;
-  width: 60px;
-  height: 32px;
+  border: 1px solid $yellow;
   font-size: 12px;
+  display: inline-block;
+  text-align: center;
 }
 
 .btn-active {
@@ -58,6 +75,10 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $pastel-yellow;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
 
 .btn-in-preparation {
@@ -66,6 +87,10 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $soft-grey;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
 
 .btn-delivered {
@@ -74,6 +99,10 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $light-green;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
 }
 
 .btn-problem {
@@ -82,11 +111,30 @@ $red-danger: #d9534f;
   border-radius: 50px;
   background: $light-red;
   transition: background 0.3s ease;
-}
-
-.h1 {
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
   font-weight: bold;
 }
+
+.btn-worker {
+  color: $dark-grey;
+  padding: 8px 24px;
+  border-radius: 50px;
+  background: $white;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid $grey;
+}
+
+.map-text {
+  font-weight: 800;
+}
+
+
 
 // .fa-truck {
 //   font-size: 40px;
