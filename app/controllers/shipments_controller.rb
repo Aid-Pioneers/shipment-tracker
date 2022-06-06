@@ -39,6 +39,20 @@ class ShipmentsController < ApplicationController
     end
   end
 
+  def edit
+    @shipment = Shipment.find(params[:id])
+    authorize @shipment
+  end
+
+  def update
+    @shipment = Shipment.find(params[:id])
+    authorize @shipment
+    if @shipment.update(shipment_params)
+      redirect_to shipment_path(@shipment)
+    else
+      render :edit
+    end
+
   def qr
     @shipment = Shipment.find(params[:shipment_id])
     authorize @shipment
