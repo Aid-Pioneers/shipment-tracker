@@ -1,30 +1,82 @@
 <div class="container">
-  <h1>Shipment</h1>
-  <h2>Details</h2>
-  <p>Start date: <%= @shipment.start_date %></p>
-  <p>End date: <%= @shipment.expected_arrival_date %></p>
-  <p>Starting location: <%= @shipment.starting_location %></p>
-  <p>Destination location: <%= @shipment.destination_location %></p>
-  <%= link_to "Download QR Code", shipment_qr_path(@shipment), class: "btn btn-success" %>
-
-  <h2>Pallets</h2>
-  <% @shipment.pallets.each do |pallet| %>
-    <p>Pallet content: <%= pallet.content %></p>
-    <%= link_to "Edit", edit_shipment_pallet_path(@shipment, pallet), class: "btn btn-primary mb-3" %>
-    <%= link_to "Delete", shipment_pallet_path(@shipment, pallet), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary mb-3" %>
-  <% end %>
-  <%= link_to "Add new pallet", new_shipment_pallet_path(@shipment), class: "btn btn-primary mb-3" %>
-  <h2>Route progress</h2>
-  <div class="col-5 mt-5">
-      <div class="text-center">
-        <h5>Track active shipments on map</h5>
-        <div class="position-sticky" style="width: 100%; height: 700px;"
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
+        <h1 class="text-dark fw-bold">Shipment <%= @shipment.id %></h1>
+        <div class="px-3 py-1 border text-secondary rounded-pill">Managed by <%= @shipment.user.full_name %></div>
+      </div>
+      <div class="btn-group w-100">
+        <%= link_to "All shipments", shipments_path, class: "bg-white fw-bold btn btn-outline-primary" %>
+        <%= link_to "Edit", edit_shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-secondary" %>
+        <%= link_to "QR", shipment_qr_path(@shipment), class: "bg-white fw-bold btn btn-outline-success" %>
+        <%= link_to "Refresh", shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-warning" %>
+      </div>
+      <div class="bg-white border border-2 rounded-3 p-3 mt-3">
+        <div class="d-flex justify-content-between">
+          <div>
+            <div class="text-secondary">Hello Fresh</div>
+            <div class="text-dark fw-bold fs-4"><%= @shipment.id %></div>
+          </div>
+          <div class="text-end">
+            <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div>
+            <div class="text-secondary mt-1"><%= @shipment.pallets.count %> pallets</div>
+          </div>
+        </div>
+        <% if @shipment.scans.count.positive? %>
+          <div class="row">
+            <div class="col-3">Last Scan</div>
+            <div class="col-1">•</div>
+            <div class="col-6"><%= @shipment.scans.first.date.strftime("%a %e %b") %></div>
+            <div class="col-3">Location</div>
+            <div class="col-1">•</div>
+            <div class="col-6 text-truncate"><%= @shipment.scans.first.location %></div>
+          </div>
+        <% else %>
+          <h2 class="fw-bold text-secondary text-center">...no scans yet</h2>
+        <% end %>
+      </div>
+      <h2 class="text-dark fw-bold mt-5 mb-3">Transport route</h2>
+      <% unless @shipment.scans.count.positive? %>
+        <h2 class="fw-bold text-secondary text-center">...no scans yet</h2>
+      <% end %>
+      <% @shipment.scans.each_with_index do |scan, index| %>
+        <% unless index == 0  %>
+          <div class="row">
+            <div class="ms-3 col-3 border-end border-2 text-secondary" style="height: 30px;"></div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-3 text-secondary"><%= scan.date.strftime("%d.%m.%Y") %></div>
+          <div class="col-1">•</div>
+          <div class="col-8"><%= scan.location %></div>
+        </div>
+      <% end %>
+      <div class="d-flex justify-content-between align-items-center mt-5">
+        <h2 class="text-dark fw-bold"><%= @shipment.pallets.count %> Pallets</h2>
+        <div class="px-3 py-1 rounded-pill bg-secondary text-secondary fw-bold m-0" style="--bs-bg-opacity: .15;">Pallets tracked together</div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-3 text-dark fs-5">Content</div>
+        <div class="col-3 text-dark fs-5">Last Scan</div>
+        <div class="col-3 text-dark fs-5">Location</div>
+        <div class="col-3 text-dark fs-5 text-center">Status</div>
+      </div>
+      <% @shipment.pallets.each do |pallet| %>
+        <%= link_to edit_shipment_pallet_path(@shipment, pallet), class: "text-decoration-none" do %>
+          <div class="row py-1 border border bg-white rounded-pill mt-2">
+            <div class="col-3 text-secondary fs-6"><%= pallet.content %></div>
+            <div class="col-3 text-secondary fs-6"><%= @shipment.scans.first.date.strftime("%d.%m.%Y") %></div>
+            <div class="col-3 text-secondary fs-6 text-truncate"><%= @shipment.scans.first.location %></div>
+            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>"><%= !@shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %></div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-12 col-lg-6">
+      <h2 class="text-dark fw-bold">Track on map</h2>
+      <div class="sticky-top rounded-3" style="height: 100vh;"
         data-controller="mapbox"
         data-mapbox-markers-value="<%= @markers.to_json %>"
         data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-      </div>
+    </div>
   </div>
-  <% @shipment.scans.order(created_at: :desc).each do |scan| %>
-    <p><%= scan.location %> <%= scan.created_at %></p>
-  <% end %>
-</div>

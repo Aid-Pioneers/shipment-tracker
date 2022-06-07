@@ -1,73 +1,32 @@
-<div class="body-container">
+<div class="body-container" data-controller="update-shipments">
   <div class="row">
     <div class="d-flex">
-
-        <div class="col-5 shipment-cards m-2">
-          <div class="row d-flex text-align-start mb-2">
-            <h1>Shipments<h1>
-          </div>
-          <div class="d-flex justify-content-evenly">
-            <h5 class="btn-tabs">All</h5>
-            <h5 class="btn-tabs">Active</h5>
-            <h5 class="btn-tabs">Delivered</h5>
-            <h5 class="btn-tabs">Problem</h5>
-          </div>
+      <div class="col-5 shipment-cards">
+        <div class="row d-flex text-align-start mb-2">
+          <h1 class="ship-title text-dark">Shipments
+            <h1>
+            </div>
+            <div class="d-flex justify-content-evenly">
+              <h5 class="btn-tabs-all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
+              <h5 class="btn-tabs" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
+              <h5 class="btn-tabs" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
+              <h5 class="btn-tabs" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
+              <h5 class="btn-tabs" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
+            </div>
             <br>
-              <% shipments.each do |shipment| %>
-                <div class="card-product m-2 p-4 border-0 shadow rounded">
-                  <div class="d-flex justify-content-between">
-                    <div class="card-infos d-flex flex-column">
-                      <%= link_to shipment_path(shipment) do %>
-                        <p><strong>Shipment number</strong></p>
-                        <p><%= shipment.id %></p>
-                      <% end %>
-                      </div>
-                      <div class="card-infos d-flex flex-column">
-                        <p class="btn-active"><strong>Active#UPDATE</strong></p>
-                        <p>Donation#-test</p>
-                      </div>
-                    </div>
-
-                    <div class="d-flex flex-column">
-                      <div class="card-infos d-flex justify-content-between">
-                        <p><%= shipment.start_date.strftime("%a %e %B")%></p>
-                        <p><%= shipment.starting_location %></p>
-                      </div>
-                      <div class="card-infos d-flex justify-content-between">
-                        <% unless shipment.scans.empty? %>
-                          <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
-                        <% end %>
-                        <% if shipment.scans.empty? %>
-                          <p> There is no scan yet for this shipment! </p>
-                        <% else %>
-                        <p><%= shipment.scans.last.location %></p>
-                        <% end %>
-                      </div>
-                      <div class="card-infos d-flex justify-content-between">
-                        <p><%= shipment.expected_arrival_date.strftime("%a %e %B")%></p>
-                        <p><%= shipment.destination_location %></p>
-                      </div>
-                    </div>
-                  </div>
-              <% end %>
-        </div>
-
-        <div class="col-5 mt-5">
+            <div data-update-shipments-target="list">
+              <%= render "shipment_card_admin_index", shipments: shipments %>
+            </div>
+          </div>
+          <div class="col-5 mt-5">
             <div class="text-center">
-              <h5>Track active shipments on map</h5>
+              <h5 class="map-text text-dark">Track on map</h5>
               <div class="position-sticky" style="width: 100%; height: 700px;"
               data-controller="mapbox"
               data-mapbox-markers-value="<%= @markers.to_json %>"
               data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<%# <div class="truck-logo bg-info">
- <i class="fa-solid fa-truck"></i>
-</div> %>
-
-<%# in p around line 28:
- class="<%=condition ? "btn-active" : "btn-passive" %>
