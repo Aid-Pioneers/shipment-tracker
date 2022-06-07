@@ -20,7 +20,6 @@ export default class extends Controller {
     this.#fitMapToMarkers()
 
     this.markers_array = this.markersValue.map((marker) => {
-      console.log(marker)
       return [marker.lng, marker.lat]
     })
 
