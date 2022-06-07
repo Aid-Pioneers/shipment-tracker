@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'donations', to: 'pages#donations'
   get 'success', to: 'pages#success'
   resources :shipments, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :pallets, only: [:new, :create, :edit, :update]
+    resources :pallets, only: [:new, :create, :edit, :update, :destroy]
     resources :scans, only: [:new, :create]
     get "qr", to: "shipments#qr"
   end

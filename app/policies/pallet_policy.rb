@@ -7,6 +7,14 @@ class PalletPolicy < ApplicationPolicy
   end
 
   def create?
-    user.aidpioneer? || user.admin?
+    user.aidpioneer?
+  end
+
+  def update?
+    user.aidpioneer?
+  end
+
+  def destroy?
+    user.aidpioneer?
   end
 end
