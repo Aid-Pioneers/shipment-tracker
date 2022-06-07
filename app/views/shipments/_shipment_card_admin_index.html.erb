@@ -25,13 +25,13 @@
           <p>Last scan</p>
           <p>Location<p>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column text-dark">
           <p> • </p>
           <p> • </p>
         </div>
-        <div class="d-flex flex-column">
+        <div class="d-flex flex-column text-dark">
           <% unless shipment.scans.empty? %>
-           <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
+           <p><%= shipment.scans.last.date.strftime("%a %e %b") %></p>
           <% end %>
           <% if shipment.scans.empty? %>
            <p> There is no scan yet for this shipment! </p>
@@ -39,10 +39,11 @@
             <p><%= shipment.scans.last.location %></p>
           <% end %>
         </div>
+        <div class="d-flex justify-content-end align-items-end">
+          <p class="btn-worker"> Managed by <%= shipment.user.first_name %> </p>
+        </div>
       </div>
     </div>
-    <div class="d-flex justify-content-end">
-      <p class="btn-worker"> Managed by <%= shipment.user.full_name %> </p>
-    </div>
+
   </div>
 <% end %>

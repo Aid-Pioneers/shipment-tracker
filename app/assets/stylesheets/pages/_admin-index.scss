@@ -48,8 +48,8 @@ $red-danger: #d9534f;
 
 .btn-tabs-all {
   color: $white;
-  padding: 8px 24px;
-  border-radius: 50px;
+  padding: 4px 16px;
+  border-radius: 8px;
   background: $yellow;
   transition: background 0.3s ease;
   font-size: 12px;
@@ -59,8 +59,8 @@ $red-danger: #d9534f;
 
 .btn-tabs {
   color: $yellow;
-  padding: 8px 24px;
-  border-radius: 50px;
+  padding: 4px 16px;
+  border-radius: 8px;
   background: $white;
   transition: background 0.3s ease;
   border: 1px solid $yellow;
@@ -71,7 +71,7 @@ $red-danger: #d9534f;
 
 .btn-active {
   color: $yellow;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $pastel-yellow;
   transition: background 0.3s ease;
@@ -83,7 +83,7 @@ $red-danger: #d9534f;
 
 .btn-in-preparation {
   color: $dark-grey;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $soft-grey;
   transition: background 0.3s ease;
@@ -95,7 +95,7 @@ $red-danger: #d9534f;
 
 .btn-delivered {
   color: $green;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $light-green;
   transition: background 0.3s ease;
@@ -107,7 +107,7 @@ $red-danger: #d9534f;
 
 .btn-problem {
   color: $red;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $light-red;
   transition: background 0.3s ease;
@@ -119,8 +119,8 @@ $red-danger: #d9534f;
 
 .btn-worker {
   color: $dark-grey;
-  padding: 8px 24px;
-  border-radius: 50px;
+  padding: 4px 16px;
+  border-radius: 8px;
   background: $white;
   transition: background 0.3s ease;
   font-size: 10px;
@@ -128,6 +128,18 @@ $red-danger: #d9534f;
   text-align: center;
   font-weight: bold;
   border: 1px solid $grey;
+}
+
+.btn-new-shipment {
+  color: $rich-black;
+  padding: 4px 16px;
+  border-radius: 8px;
+  background: $yellow;
+  transition: background 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
 }
 
 .map-text {
