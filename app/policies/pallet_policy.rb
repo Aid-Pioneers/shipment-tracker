@@ -17,4 +17,8 @@ class PalletPolicy < ApplicationPolicy
   def destroy?
     user.aidpioneer?
   end
+
+  def qr?
+    user.aidpioneer?
+  end
 end
