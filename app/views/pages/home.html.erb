@@ -6,17 +6,18 @@
   </div>
 </div>
 
-<div class="row cards-container gx-3 gy-5">
-  <% @projects.each do |project| %>
-    <div class="col-4">
-    <%= link_to shipments_path do %>
-      <div class="card">
-        <%= image_tag "truck.jpg", class: "card-image" %>
-        <div class="container card-text-not-bootstrap">
-          <h4><b><%= project.name %></b></h4>
-        </div>
+<div class="container mt-5 mb-3">
+  <div class="row g-3">
+    <% @projects.each do |project| %>
+      <div class="col-12 col-md-6 col-xl-4">
+        <%= link_to shipments_path do %>
+          <div class="project-card" style="background-image: url('<%= image_path "truck.jpg" %>');">
+            <div class="project-cards-container project-card-text-not-bootstrap">
+              <h4><b><%= project.name %></b></h4>
+            </div>
+          </div>
+        <% end %>
       </div>
     <% end %>
-    </div>
-  <% end %>
+  </div>
 </div>
