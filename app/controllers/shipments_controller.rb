@@ -1,7 +1,5 @@
 require 'rqrcode'
 class ShipmentsController < ApplicationController
-  before_action :set_shipment, only: [:show ]
-
   def new
     @shipment = Shipment.new
     authorize @shipment
@@ -10,6 +8,13 @@ class ShipmentsController < ApplicationController
   def create
     @shipment = Shipment.new(shipment_params)
     authorize @shipment
+
+    @shipment.start_lat = Geocoder.search(@shipment.starting_location).first.latitude
+    @shipment.start_lon = Geocoder.search(@shipment.starting_location).first.longitude
+
+    @shipment.destination_lat = Geocoder.search(@shipment.destination_location).first.latitude
+    @shipment.destination_lon = Geocoder.search(@shipment.destination_location).first.longitude
+
     if @shipment.save
       redirect_to shipment_path(@shipment)
     else
@@ -18,17 +23,20 @@ class ShipmentsController < ApplicationController
   end
 
   def show
+    @shipment = Shipment.includes(:scans, :pallets).find(params[:id])
     authorize @shipment
-    @markers = @shipment.scans.map do |scan|
+    @markers = @shipment.scans.sort.map do |scan|
       {
         lat: scan.latitude,
         lng: scan.longitude,
-        image_url: helpers.asset_url("location_in_transit.svg")
+        image_url: helpers.asset_url("location.svg")
       }
     end
+    @markers.unshift({ lat: @shipment.start_lat, lng: @shipment.start_lon, image_url: helpers.asset_url("location_start.svg")})
+    @markers.push({ lat: @shipment.destination_lat, lng: @shipment.destination_lon, image_url: helpers.asset_url("location_destination.svg")})
   end
 
-  def index # missing some stuff
+  def index
     @shipments = policy_scope(Shipment)
     scans = @shipments.map do |shipment|
       shipment.scans

@@ -53,20 +53,28 @@ export default class extends Controller {
   }
 
   #addMarkersToMap() {
+    let counter = 0
     this.markersValue.forEach((marker) => {
+      counter += 1
+    })
+    console.log(counter)
+    this.markersValue.forEach((marker, index) => {
       // const popup = new mapboxgl.Popup().setHTML(marker.info_window)
 
       // Create a HTML element for your custom marker
       const customMarker = document.createElement("a")
       customMarker.className = "marker"
       customMarker.style.backgroundImage = `url('${marker.image_url}')`
-      customMarker.style.backgroundSize = "fill"
+      customMarker.style.backgroundSize = "contain"
       customMarker.style.backgroundRepeat = "no-repeat"
-      customMarker.style.width = "32.5px"
-      customMarker.style.height = "40px"
-      customMarker.style.paddingBottom = "61px"
-      customMarker.style.marginLeft = "3px"
-      // customMarker.sty
+      customMarker.style.width = "20px"
+      customMarker.style.height = "20px"
+      if (index == 0 || index == counter - 1) {
+        customMarker.style.marginLeft = "8px"
+        customMarker.style.paddingBottom = "39px"
+      } else {
+        customMarker.style.paddingBottom = "39px"
+      }
 
       // Pass the element as an argument to the new marker
       new mapboxgl.Marker(customMarker)
