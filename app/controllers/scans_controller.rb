@@ -9,11 +9,20 @@ class ScansController < ApplicationController
 
   def create
     @scan = Scan.new(scan_params)
+    @shipment = Shipment.find(params[:shipment_id])
+    @scan.shipment = @shipment
+    @scan.date = DateTime.now
     authorize @scan
     if @scan.save
-      redirect_to scan_path(@scan)
+      respond_to do |format|
+        format.html { redirect_to shipment_path(@shipment) }
+        format.json { render json: @scan }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.html { render :new }
+        format.json { render json: @scan.errors, status: :unprocessable_entity }
+      end
     end
   end
 

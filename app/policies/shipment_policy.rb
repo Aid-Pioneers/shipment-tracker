@@ -14,6 +14,10 @@ class ShipmentPolicy < ApplicationPolicy
     user.aidpioneer?
   end
 
+  def update?
+    user.aidpioneer?
+  end
+
   def show?
     user.aidpioneer?
   end

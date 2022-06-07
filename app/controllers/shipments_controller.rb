@@ -1,7 +1,5 @@
 require 'rqrcode'
 class ShipmentsController < ApplicationController
-  before_action :set_shipment, only: [:show ]
-
   def new
     @shipment = Shipment.new
     authorize @shipment
@@ -18,7 +16,14 @@ class ShipmentsController < ApplicationController
   end
 
   def show
+    @shipment = Shipment.includes(:scans, :pallets).find(params[:id])
     authorize @shipment
+    @markers = @shipment.scans.map do |scan|
+      {
+        lat: scan.latitude,
+        lng: scan.longitude
+      }
+    end
   end
 
   def index # missing some stuff
@@ -31,6 +36,31 @@ class ShipmentsController < ApplicationController
         lat: scan.latitude,
         lng: scan.longitude
       }
+    end
+
+    if params[:query].present? && params[:query] != "all"
+      @shipments = @shipments.where(status: params[:query])
+    end
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: 'shipments/shipment_card_admin_index', locals: { shipments: @shipments }, formats: [:html] }
+    end
+
+  end
+
+  def edit
+    @shipment = Shipment.find(params[:id])
+    authorize @shipment
+  end
+
+  def update
+    @shipment = Shipment.find(params[:id])
+    authorize @shipment
+    if @shipment.update(shipment_params)
+      redirect_to shipment_path(@shipment)
+    else
+      render :edit
     end
   end
 
@@ -45,9 +75,5 @@ class ShipmentsController < ApplicationController
   def shipment_params
     params.require(:shipment).permit(:project_id, :user_id, :start_date, :expected_arrival_date, :transport_type,
                                      :starting_location, :destination_location, :qr_code_type, :status)
-  end
-
-  def set_shipment
-    @shipment = Shipment.find(params[:id])
   end
 end

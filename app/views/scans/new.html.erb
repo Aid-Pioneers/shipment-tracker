@@ -1,10 +1,12 @@
-<p>Click the button to get your coordinates.</p>
+<div class="container">
+  <p>Click the button to send your coordinates.</p>
 
-<p id="shipment" data-shipment="<%= @shipment.id %>"></p>
+  <p id="shipment" data-shipment="<%= @shipment.id %>"></p>
 
-<button onclick="getLocation()">Try It</button>
+  <button class="btn btn-primary" onclick="getLocation()">Send location</button>
 
-<p id="geolocation"></p>
+  <p id="geolocation"></p>
+</div>
 
 <script>
 let x = document.getElementById("geolocation");
@@ -25,15 +27,21 @@ function showPosition(position) {
   fetch("/shipments/" + id.dataset.shipment + "/scans", {
     method: "POST",
     headers: {
-    "X-CSRF-Token": csrfToken, // Set the token
-    "Content-Type": "application/json"
+      "X-CSRF-Token": csrfToken, // Set the token
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify({scan: { latitude: position.coords.latitude, longitude: position.coords.longitude, sticker_destroyed: false}})
   })
-    .then(response => response.text())
+    .then(response => response.json())
     .then((data) => {
-      console.log(data)
-    })
+      if (data.shipment) {
+        x.classList.add("text-danger");
+        x.innerHTML = "Error submitting location";
+      } else {
+        location.href = "/success"
+      }
+    }).catch(error => console.log(error))
 }
 
 function showError(error) {
