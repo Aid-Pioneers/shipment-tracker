@@ -1,1 +1,23 @@
-<h1>Something sidebar something</h1>
+<div class="sidenav">
+  <div>
+    <div class="user-info">
+      <h3><%= current_user.first_name  %> <%= current_user.last_name  %></h3>
+      <p><%= current_user.email %></p>
+    </div>
+    <div class="projects">
+      <p class="bold">Projects</p>
+      <% Project.all.each do |project| %>
+        <% if current_page?(request.url) %>
+          <p class="active"><%= project.name %></p>
+        <% else %>
+        <p class="inactive"><%= project.name %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div>
+    <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-logout" do  %>
+      <%= image_tag "logout.png", class: "btn-img" %>Log out
+    <% end %>
+  </div>
+</div>

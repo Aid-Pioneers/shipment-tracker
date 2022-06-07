@@ -15,3 +15,6 @@ ActiveStorage.start()
 import "controllers"
 import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all"
+import initFlatpickr from "../plugins/initFlatpickr"
+
+initFlatpickr();

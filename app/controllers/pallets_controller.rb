@@ -30,6 +30,29 @@ class PalletsController < ApplicationController
     end
   end
 
+  def edit
+    @pallet = Pallet.find(params[:id])
+    authorize @pallet
+  end
+
+  def update
+    @pallet = Pallet.find(params[:id])
+    authorize @pallet
+    @pallet.update(pallet_params)
+    if @pallet.save
+      redirect_to shipment_path(@shipment), notice: 'Your item was successfully updated.'
+    else
+      render :edit, notice: 'Error, your item was not properly edited, try again.'
+    end
+  end
+
+  def destroy
+    @pallet = Pallet.find(params[:id])
+    authorize @pallet
+    @pallet.destroy
+    redirect_to shipment_path(@shipment)
+  end
+
   private
 
   def set_shipment
