@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  enum user_type: [:donor, :aidpioneer, :admin]
+  enum user_type: [:donor, :aidpioneer]
 
   has_many :donations, class_name: "Pallet", foreign_key: "user_id"
   has_many :shipments

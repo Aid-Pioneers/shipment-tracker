@@ -36,6 +36,7 @@ gem 'simple_form', github: 'heartcombo/simple_form'
 gem 'pundit'
 gem "rqrcode", "~> 2.0"
 gem "geocoder"
+gem 'rails_admin', '~> 2.0'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
