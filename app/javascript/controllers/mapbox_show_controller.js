@@ -46,7 +46,8 @@ export default class extends Controller {
       },
       'paint': {
       'line-color': '#9198a3',
-      'line-width': 1
+      'line-width': 1,
+      'line-dasharray': [1, 4]
       }
       });
       });
