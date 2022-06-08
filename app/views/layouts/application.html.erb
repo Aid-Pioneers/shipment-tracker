@@ -41,7 +41,7 @@
   </head>
 
   <body>
-    <% if request.path == "/users/sign_in" || request.path == "/users/sign_up"%>
+    <% if !user_signed_in? %>
       <%= yield %>
     <% elsif request.path == "/"  %>
       <%= render 'shared/navbar' %>
