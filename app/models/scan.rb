@@ -10,4 +10,5 @@ class Scan < ApplicationRecord
     end
   end
   after_validation :geocode, :reverse_geocode
+
 end
