@@ -6,10 +6,18 @@
         <div class="px-3 py-1 border text-secondary rounded-pill">Managed by <%= @shipment.user.full_name %></div>
       </div>
       <div class="btn-group w-100">
-        <%= link_to "All shipments", shipments_path, class: "bg-white fw-bold btn btn-outline-primary" %>
-        <%= link_to "Edit", edit_shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-secondary" %>
-        <%= link_to "QR", shipment_qr_path(@shipment), class: "bg-white fw-bold btn btn-outline-success" %>
-        <%= link_to "Refresh", shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-warning" %>
+        <%= link_to shipments_path, class: "bg-white fw-bold btn btn-outline-primary" do %>
+            <i class="fa-solid fa-left-long"></i> Back
+        <% end %>
+        <%= link_to edit_shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-secondary" do %>
+            <i class="fa-solid fa-pen-to-square"></i> Edit
+        <% end %>
+        <%= link_to shipment_qr_path(@shipment), class: "bg-white fw-bold btn btn-outline-success" do %>
+          <i class="fa-solid fa-qrcode"></i> QR
+        <% end %>
+        <%= link_to shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-warning" do %>
+          <i class="fa-solid fa-rotate-right"></i> Refresh
+        <% end %>
       </div>
       <div class="bg-white border border-2 rounded-3 p-3 mt-3">
         <div class="d-flex justify-content-between">
