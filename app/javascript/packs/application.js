@@ -17,4 +17,9 @@ import "bootstrap"
 import "@fortawesome/fontawesome-free/js/all"
 import initFlatpickr from "../plugins/initFlatpickr"
 
-initFlatpickr();
+const renderComponent = () => {
+  initFlatpickr();
+};
+
+// Listen to `turbolinks:load` event
+document.addEventListener("turbolinks:load", renderComponent);
