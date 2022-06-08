@@ -1,10 +1,12 @@
-<%= simple_form_for [shipment, pallet] do |f| %>
+<%= simple_form_for(@shipment ? [@shipment, pallet] : pallet )  do |f| %>
   <%= f.input :content %>
   <%= f.input :content_category, as: :select, collection: Pallet::CATEGORIES %>
-  <div class="mb-3">
-    <label class="form-label" for="count">Count</label>
-    <input class="form-control" type="number" id="count" name="count" min="1" max="40">
-  </div>
+  <% if @shipment %>
+    <div class="mb-3">
+      <label class="form-label" for="count">Count</label>
+      <input class="form-control" type="number" id="count" name="count" min="1" max="40">
+    </div>
+  <% end %>
   <%= f.association :donor, collection: User.donor, label_method: :full_name %>
   <%= f.input :qr_code_type, as: :select, collection: Pallet.qr_code_types.keys.to_a, include_blank: false, label_method: :titleize  %>
   <%= f.button :submit, class: "btn btn-primary" %>
