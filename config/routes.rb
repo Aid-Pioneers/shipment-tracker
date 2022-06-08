@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   get 'donations', to: 'pages#donations'
   get 'success', to: 'pages#success'
   resources :shipments, only: [:index, :show, :new, :create, :edit, :update] do
-    resources :pallets, only: [:new, :create, :edit, :update, :destroy] do
-      resources :pallet_scans, only: [:new, :create]
-      get "qr", to: "pallets#qr"
-    end
+    resources :pallets, only: [:new, :create]
     resources :scans, only: [:new, :create]
     get "qr", to: "shipments#qr"
+  end
+
+  resources :pallets, only: [:edit, :update, :destroy] do
+    resources :pallet_scans, only: [:new, :create]
+    get "qr", to: "pallets#qr"
   end
 
   resources :projects

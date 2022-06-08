@@ -2,7 +2,7 @@
   <p>Click the button to send the pallet's coordinates.</p>
 
   <p id="pallet" data-pallet="<%= @pallet.id %>"></p>
-  <p id="shipment" data-shipment="<%= @shipment.id %>"></p>
+
 
   <button class="btn btn-primary" onclick="getLocation()">Send location</button>
 
@@ -24,9 +24,8 @@ function showPosition(position) {
   x.innerHTML = "Latitude: " + position.coords.latitude +
   "<br>Longitude: " + position.coords.longitude;
   const id = document.getElementById("pallet");
-  const id_shipment = document.getElementById("shipment");
   const csrfToken = document.querySelector("[name='csrf-token']").content
-  fetch("/shipments/"+ id_shipment.dataset.shipment +"/pallets/" + id.dataset.pallet + "/pallet_scans", {
+  fetch("/pallets/" + id.dataset.pallet + "/pallet_scans", {
     method: "POST",
     headers: {
       "X-CSRF-Token": csrfToken, // Set the token

@@ -4,20 +4,18 @@ class PalletScansController < ApplicationController
   def new
     @pallet_scan = PalletScan.new
     @pallet = Pallet.find(params[:pallet_id])
-    @shipment = Shipment.find(params[:shipment_id])
     authorize @pallet_scan
   end
 
   def create
     @pallet_scan = PalletScan.new(pallet_scan_params)
     @pallet = Pallet.find(params[:pallet_id])
-    @shipment = Shipment.find(params[:shipment_id])
     @pallet_scan.pallet = @pallet
     @pallet_scan.date = DateTime.now
     authorize @pallet_scan
     if @pallet_scan.save
       respond_to do |format|
-        format.html { redirect_to pallett_path(@pallet) }
+        format.html { redirect_to pallet_path(@pallet) }
         format.json { render json: @pallet_scan }
       end
     else
