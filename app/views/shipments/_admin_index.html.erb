@@ -1,32 +1,30 @@
-<div class="body-container" data-controller="update-shipments">
+<div class="body-container container" data-controller="update-shipments">
   <div class="row">
-    <div class="d-flex">
-      <div class="col-5 shipment-cards">
-        <div class="row d-flex text-align-start mb-2">
-          <h1 class="ship-title text-dark">Shipments
-            <h1>
-            </div>
-            <div class="d-flex justify-content-evenly">
-              <h5 class="btn-tabs-all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
-              <h5 class="btn-tabs" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
-              <h5 class="btn-tabs" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
-              <h5 class="btn-tabs" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
-              <h5 class="btn-tabs" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
-            </div>
-            <br>
-            <div data-update-shipments-target="list">
-              <%= render "shipment_card_admin_index", shipments: shipments %>
-            </div>
-          </div>
-          <div class="col-5 mt-5">
-            <div class="text-center">
-              <h5 class="map-text text-dark">Track on map</h5>
-              <div class="position-sticky" style="width: 100%; height: 700px;"
-              data-controller="mapbox"
-              data-mapbox-markers-value="<%= @markers.to_json %>"
-              data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-            </div>
-          </div>
+    <div class="col-12 col-xl-6">
+      <div class="shipment-cards">
+        <div class="mb-2">
+          <h1 class="ship-title text-dark">Shipments</h1>
+        </div>
+        <div class="d-flex justify-content-evenly">
+          <h5 class="btn-tabs-all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
+          <h5 class="btn-tabs" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
+          <h5 class="btn-tabs" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
+          <h5 class="btn-tabs" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
+          <h5 class="btn-tabs" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
+        </div>
+        <br>
+        <div data-update-shipments-target="list">
+          <%= render "shipment_card_admin_index", shipments: shipments %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-xl-6 pt-3 position-sticky" style="top: 20px; height: fit-content;">
+      <div class="text-center">
+        <h5 class="map-text text-dark">Track on map</h5>
+        <div style="width: 100%; height: 90vh;"
+          data-controller="mapbox"
+          data-mapbox-markers-value="<%= @markers.to_json %>"
+          data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
         </div>
       </div>
     </div>

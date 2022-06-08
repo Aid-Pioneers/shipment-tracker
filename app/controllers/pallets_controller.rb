@@ -1,3 +1,4 @@
+require 'rqrcode'
 class PalletsController < ApplicationController
   before_action :set_shipment
 
@@ -53,6 +54,12 @@ class PalletsController < ApplicationController
     redirect_to shipment_path(@shipment)
   end
 
+  def qr
+    @pallet = Pallet.find(params[:pallet_id])
+    authorize @pallet
+    send_data RQRCode::QRCode.new(new_pallet_pallet_scan_url(@shipment, @pallet)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
+  end
+
   private
 
   def set_shipment
@@ -60,6 +67,6 @@ class PalletsController < ApplicationController
   end
 
   def pallet_params
-    params.require(:pallet).permit(:user_id, :content, :content_category)
+    params.require(:pallet).permit(:user_id, :content, :content_category, :qr_code_type)
   end
 end

@@ -26,7 +26,7 @@ User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.c
 # p u.errors.full_messages
 User.create(first_name: "Sophie", last_name: "Sorin", email: "sophie@sorin.com", password: "123456")
 User.create(first_name: "Maria", last_name: "Pigazzi", email: "maria@pigazzi.com", password: "123456")
-User.create(first_name: "Finn", last_name: "Stürenburg", email: "finn@stuerenburg.com", password: "123456")
+User.create(first_name: "Finn", last_name: "Stürenburg", email: "finn@stuerenburg.com", password: "123456", admin: true)
 User.create(first_name: "Dr. Malik", last_name: "Weber", email: "dr.malik@weber.com", password: "123456", user_type: 0)
 User.create(first_name: "Mitzy-Gertrud", last_name: "Von Knapfen", email: "mitzy@gertrud.com", password: "123456", user_type: 0)
 User.create(first_name: "Snoop", last_name: "Paca III", email: "snoop@paca.com", password: "123456", user_type: 0)
