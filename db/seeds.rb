@@ -26,7 +26,7 @@ User.create(first_name: "Vincent", last_name: "Stuber", email: "vincent@stuber.c
 # p u.errors.full_messages
 User.create(first_name: "Sophie", last_name: "Sorin", email: "sophie@sorin.com", password: "123456")
 User.create(first_name: "Maria", last_name: "Pigazzi", email: "maria@pigazzi.com", password: "123456")
-User.create(first_name: "Finn", last_name: "Stürenburg", email: "finn@stuerenburg.com", password: "123456")
+User.create(first_name: "Finn", last_name: "Stürenburg", email: "finn@stuerenburg.com", password: "123456", admin: true)
 User.create(first_name: "Dr. Malik", last_name: "Weber", email: "dr.malik@weber.com", password: "123456", user_type: 0)
 User.create(first_name: "Mitzy-Gertrud", last_name: "Von Knapfen", email: "mitzy@gertrud.com", password: "123456", user_type: 0)
 User.create(first_name: "Snoop", last_name: "Paca III", email: "snoop@paca.com", password: "123456", user_type: 0)
@@ -62,14 +62,11 @@ end
 
 puts "--- creating scans ---"
 40.times do
- s = Scan.new
- s.shipment = Shipment.all.sample
- s.date = s.shipment.start_date + rand(0..4).days + rand(0..12).hours + + rand(0..60).minutes
- location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
-  coords = Geocoder.search(location).first.coordinates
-  s.latitude = coords[0]
-  s.longitude = coords[1]
- s.sticker_destroyed = 0 # just leaving it false for now
- s.save
- p s.errors.full_messages
+  s = Scan.new
+  s.shipment = Shipment.all.sample
+  s.date = s.shipment.start_date + rand(0..4).days + rand(0..12).hours + + rand(0..60).minutes
+  s.location = ["Berlin", "Warsaw", "Border Poland", "Lviv", "Rivne", "Ivano-Frankivsk", "Ternopil"].sample # does it get scanned anywhere between between Berlin and the POL/UKR border?
+  s.sticker_destroyed = 0 # just leaving it false for now
+  s.save
+  p s.errors.full_messages
 end

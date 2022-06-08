@@ -1,11 +1,51 @@
+<% shipments.each do |shipment| %>
+  <%= link_to shipment_path(shipment), class: "text-decoration-none link-secondary" do %>
+  <div class="card-product m-2 p-4 border-0 shadow rounded">
+  <div class="d-flex justify-content-between">
+    <div class="card-infos d-flex flex-column">
+        <p class="ship-donor"><%= shipment.all_donors %></p>
+        <p class="ship-id-num fw-bold text-dark"><%= shipment.id %></p>
+      </div>
+      <div class="card-infos d-flex flex-column">
+        <% if shipment.status == "in_preparation" %>
+          <p class="btn-in-preparation"> In preparation </p>
+        <% elsif shipment.status == "in_transit" %>
+          <p class="btn-active"> Active </p>
+        <% elsif shipment.status == "delivered" %>
+          <p class="btn-delivered"> Delivered </p>
+        <% elsif shipment.status == "problematic" %>
+          <p class="btn-problem"> Problematic </p>
+        <% end %>
+        <p class="ship-pallet-count"><%= shipment.pallets.count%> pallets</p>
+      </div>
+    </div>
 
-<%# Font Awesome Truck Icon
-<i class="fa-solid fa-truck"></i> %>
+    <div class="d-flex flex-column mt-4">
+      <div class="card-infos d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <p>Last scan</p>
+          <p>Location<p>
+        </div>
+        <div class="d-flex flex-column text-dark">
+          <p> • </p>
+          <p> • </p>
+        </div>
+        <div class="d-flex flex-column text-dark">
+          <% unless shipment.scans.empty? %>
+           <p><%= shipment.scans.last.date.strftime("%a %e %b") %></p>
+          <% end %>
+          <% if shipment.scans.empty? %>
+           <p> There is no scan yet for this shipment! </p>
+          <% else %>
+            <p><%= shipment.scans.last.location %></p>
+          <% end %>
+        </div>
+        <div class="d-flex justify-content-end align-items-end">
+          <p class="btn-worker"> Managed by <%= shipment.user.first_name %> </p>
+        </div>
+      </div>
+    </div>
 
-<div class="card-product">
-  <i class="fa-solid fa-truck"></i>
-  <div class="card-product-infos">
-    <h2>Product name</h2>
-    <p>Product description with <strong>relevant info</strong> only.</p>
   </div>
-</div>
+  <% end %>
+<% end %>

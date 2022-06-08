@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_080723) do
+ActiveRecord::Schema.define(version: 2022_06_07_105721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "pallet_scans", force: :cascade do |t|
+    t.bigint "pallet_id", null: false
+    t.string "location"
+    t.boolean "sticker_destroyed"
+    t.datetime "date"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pallet_id"], name: "index_pallet_scans_on_pallet_id"
+  end
 
   create_table "pallets", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -22,6 +34,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_080723) do
     t.string "content_category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "qr_code_type", default: 0
     t.index ["shipment_id"], name: "index_pallets_on_shipment_id"
     t.index ["user_id"], name: "index_pallets_on_user_id"
   end
@@ -75,10 +88,12 @@ ActiveRecord::Schema.define(version: 2022_06_07_080723) do
     t.string "first_name"
     t.string "last_name"
     t.integer "user_type", default: 1
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "pallet_scans", "pallets"
   add_foreign_key "pallets", "shipments"
   add_foreign_key "pallets", "users"
   add_foreign_key "scans", "shipments"

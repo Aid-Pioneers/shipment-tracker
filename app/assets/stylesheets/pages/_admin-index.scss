@@ -5,9 +5,32 @@ $soft-grey: #FAFAFA;
 $pastel-yellow: #FDF7D8;
 $yellow: #FED330;
 $white: #FFFFFF;
+$green: #008000;
+$light-green: #AAF683;
+$red: #800F2F;
+$light-red: #FFCCD5;
+$green-success: #5cb85c;
+$red-danger: #d9534f;
 
-* {
+.body-container {
   font-family: 'Poppins', sans-serif;
+  color: $dark-grey;
+}
+
+.ship-title {
+  font-weight: 700;
+}
+
+.ship-donor {
+  font-size: 18px;
+}
+
+.ship-id-num {
+  font-size: 24px;
+}
+
+.ship-pallet-count {
+  font-size: 18px;
 }
 
 .body-container {
@@ -23,32 +46,118 @@ $white: #FFFFFF;
   background-color: $white;
 }
 
-.btn-tabs {
-  color: $pastel-yellow;
-  padding: 8px 24px;
-  border-radius: 50px;
+.btn-tabs-all {
+  color: $white;
+  padding: 4px 16px;
+  border-radius: 8px;
   background: $yellow;
   transition: background 0.3s ease;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btn-tabs {
+  color: $yellow;
+  padding: 4px 16px;
+  border-radius: 8px;
+  background: $white;
+  transition: background 0.3s ease;
+  border: 1px solid $yellow;
+  font-size: 12px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .btn-active {
   color: $yellow;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $pastel-yellow;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-.btn-passive {
+.btn-in-preparation {
   color: $dark-grey;
-  padding: 8px 24px;
+  padding: 4px 16px;
   border-radius: 50px;
   background: $soft-grey;
   transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
 }
 
-.h1 {
+.btn-delivered {
+  color: $green;
+  padding: 4px 16px;
+  border-radius: 50px;
+  background: $light-green;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
   font-weight: bold;
+  white-space: nowrap;
+}
+
+.btn-problem {
+  color: $red;
+  padding: 4px 16px;
+  border-radius: 50px;
+  background: $light-red;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.btn-worker {
+  color: $dark-grey;
+  padding: 4px 16px;
+  border-radius: 8px;
+  background: $white;
+  transition: background 0.3s ease;
+  font-size: 10px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid $grey;
+  white-space: nowrap;
+}
+
+.btn-new-shipment {
+  color: $rich-black;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: $yellow;
+  transition: background 0.3s ease;
+  font-size: 12px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  border: 1px solid $yellow;
+}
+
+.map-text {
+  font-weight: 700;
+}
+
+.margin-class {
+  margin-top: 45px;
+  margin-bottom: 25px;
 }
 
 
