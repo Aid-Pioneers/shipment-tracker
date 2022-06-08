@@ -55,6 +55,7 @@ $red-danger: #d9534f;
   font-size: 12px;
   display: inline-block;
   text-align: center;
+  white-space: nowrap;
 }
 
 .btn-tabs {
@@ -67,6 +68,7 @@ $red-danger: #d9534f;
   font-size: 12px;
   display: inline-block;
   text-align: center;
+  white-space: nowrap;
 }
 
 .btn-active {
@@ -79,6 +81,7 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .btn-in-preparation {
@@ -91,6 +94,7 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .btn-delivered {
@@ -103,6 +107,7 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .btn-problem {
@@ -115,6 +120,7 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .btn-worker {
@@ -128,11 +134,12 @@ $red-danger: #d9534f;
   text-align: center;
   font-weight: bold;
   border: 1px solid $grey;
+  white-space: nowrap;
 }
 
 .btn-new-shipment {
   color: $rich-black;
-  padding: 4px 16px;
+  padding: 8px 16px;
   border-radius: 8px;
   background: $yellow;
   transition: background 0.3s ease;
@@ -140,10 +147,16 @@ $red-danger: #d9534f;
   font-weight: bold;
   display: inline-block;
   text-align: center;
+  white-space: nowrap;
 }
 
 .map-text {
   font-weight: 700;
+}
+
+.margin-class {
+  padding-top: 7px;
+  margin-bottom: 23px;
 }
 
 
