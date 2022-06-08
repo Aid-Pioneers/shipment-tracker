@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-12 col-xl-6">
       <div class="shipment-cards">
-        <div class="mb-2">
+        <div class="mb-5">
           <h1 class="ship-title text-dark">Shipments</h1>
         </div>
         <div class="d-flex justify-content-evenly mb-3">
@@ -19,9 +19,9 @@
     </div>
     <div class="col-12 col-xl-6 pt-3 position-sticky" style="top: 20px; height: fit-content;">
       <div class="d-flex justify-content-end mb-2" >
-        <p class="btn-new-shipment">New Shipment</p>
+        <%= link_to '<button class="btn-new-shipment">New Shipment</button>'.html_safe, new_shipment_path %>
       </div>
-      <div class="text-center">
+      <div>
         <h5 class="map-text text-dark margin-class">Track on map</h5>
         <div style="width: 100%; height: 90vh;"
           data-controller="mapbox"
