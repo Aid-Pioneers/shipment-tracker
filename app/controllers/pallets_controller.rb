@@ -1,6 +1,7 @@
 require 'rqrcode'
+
 class PalletsController < ApplicationController
-  before_action :set_shipment
+  before_action :set_shipment, only: [:new, :create]
 
   def new
     @pallet = Pallet.new
@@ -41,7 +42,7 @@ class PalletsController < ApplicationController
     authorize @pallet
     @pallet.update(pallet_params)
     if @pallet.save
-      redirect_to shipment_path(@shipment), notice: 'Your item was successfully updated.'
+      redirect_to shipment_path(@pallet.shipment), notice: 'Your item was successfully updated.'
     else
       render :edit, notice: 'Error, your item was not properly edited, try again.'
     end
@@ -51,7 +52,7 @@ class PalletsController < ApplicationController
     @pallet = Pallet.find(params[:id])
     authorize @pallet
     @pallet.destroy
-    redirect_to shipment_path(@shipment)
+    redirect_to shipment_path(@pallet.shipment)
   end
 
   def qr
