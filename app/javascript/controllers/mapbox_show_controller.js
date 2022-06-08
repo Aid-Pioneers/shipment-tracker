@@ -70,8 +70,11 @@ export default class extends Controller {
       customMarker.style.width = "20px"
       customMarker.style.height = "20px"
       if (index == 0 || index == counter - 1) {
-        customMarker.style.marginLeft = "8px"
+        customMarker.style.marginLeft = "7px"
         customMarker.style.paddingBottom = "39px"
+      } else if (index == counter - 2) {
+        customMarker.style.paddingBottom = "51px"
+        customMarker.style.paddingRight = "1px"
       } else {
         customMarker.style.paddingBottom = "39px"
       }

@@ -9,11 +9,14 @@ class ShipmentsController < ApplicationController
     @shipment = Shipment.new(shipment_params)
     authorize @shipment
 
-    @shipment.start_lat = Geocoder.search(@shipment.starting_location).first.latitude
-    @shipment.start_lon = Geocoder.search(@shipment.starting_location).first.longitude
+    result_start = Geocoder.search(@shipment.starting_location)
+    result_destination = Geocoder.search(@shipment.destination_location)
 
-    @shipment.destination_lat = Geocoder.search(@shipment.destination_location).first.latitude
-    @shipment.destination_lon = Geocoder.search(@shipment.destination_location).first.longitude
+    @shipment.start_lat = result_start.first.latitude
+    @shipment.start_lon = result_start.first.longitude
+
+    @shipment.destination_lat = result_destination.first.latitude
+    @shipment.destination_lon = result_destination.first.longitude
 
     if @shipment.save
       redirect_to shipment_path(@shipment)
@@ -31,6 +34,9 @@ class ShipmentsController < ApplicationController
         lng: scan.longitude,
         image_url: helpers.asset_url("location.svg")
       }
+    end
+    if @markers.size.positive?
+      @markers.last[:image_url] = helpers.asset_url("location_in_transit.svg")
     end
     @markers.unshift({ lat: @shipment.start_lat, lng: @shipment.start_lon, image_url: helpers.asset_url("location_start.svg")})
     @markers.push({ lat: @shipment.destination_lat, lng: @shipment.destination_lon, image_url: helpers.asset_url("location_destination.svg")})

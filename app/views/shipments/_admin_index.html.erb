@@ -34,8 +34,8 @@
                         <p><%= shipment.starting_location %></p>
                       </div>
                       <div class="card-infos d-flex justify-content-between">
-                        <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p>
-                        <p><%= shipment.scans.last.location %></p>
+                        <%# <p><%= shipment.scans.last.date.strftime("%a %e %b,  %l:%M  %p") %></p> %>
+                        <%# <p><%= shipment.scans.last.location %></p> %>
                       </div>
                       <div class="card-infos d-flex justify-content-between">
                         <p><%= shipment.expected_arrival_date.strftime("%a %e %B")%></p>

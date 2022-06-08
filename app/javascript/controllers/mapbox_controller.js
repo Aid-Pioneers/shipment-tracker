@@ -31,7 +31,8 @@ export default class extends Controller {
       customMarker.style.backgroundRepeat = "no-repeat"
       customMarker.style.width = "32.5px"
       customMarker.style.height = "40px"
-      customMarker.style.paddingBottom = "8px"
+      customMarker.style.paddingBottom = "51px"
+      customMarker.style.paddingRight = "1px"
       customMarker.href = marker.href
       // customMarker.sty
 
