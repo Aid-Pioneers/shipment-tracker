@@ -1,21 +1,21 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-6 my-5">
+    <div class="col-12 col-xl-6 my-3">
       <div class="d-flex justify-content-between align-items-center gap-3 mb-3">
         <h1 class="text-dark fw-bold">Shipment <%= @shipment.id %></h1>
         <div class="px-3 py-1 border text-secondary rounded-pill">Managed by <%= @shipment.user.full_name %></div>
       </div>
       <div class="btn-group w-100">
-        <%= link_to shipments_path, class: "bg-white fw-bold btn btn-outline-primary" do %>
+        <%= link_to shipments_path, class: "fw-bold btn btn-outline-primary" do %>
             <i class="fa-solid fa-left-long"></i> Back
         <% end %>
-        <%= link_to edit_shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-secondary" do %>
+        <%= link_to edit_shipment_path(@shipment), class: "fw-bold btn btn-outline-secondary" do %>
             <i class="fa-solid fa-pen-to-square"></i> Edit
         <% end %>
-        <%= link_to shipment_qr_path(@shipment), class: "bg-white fw-bold btn btn-outline-success" do %>
+        <%= link_to shipment_qr_path(@shipment), class: "fw-bold btn btn-outline-success" do %>
           <i class="fa-solid fa-qrcode"></i> QR
         <% end %>
-        <%= link_to shipment_path(@shipment), class: "bg-white fw-bold btn btn-outline-warning" do %>
+        <%= link_to shipment_path(@shipment), class: "fw-bold btn btn-outline-warning" do %>
           <i class="fa-solid fa-rotate-right"></i> Refresh
         <% end %>
       </div>
@@ -47,18 +47,41 @@
       <% unless @shipment.scans.count.positive? %>
         <h2 class="fw-bold text-secondary text-center">...no scans yet</h2>
       <% end %>
+      <div class="row">
+        <div class="col-3 text-secondary"><%= @shipment.expected_arrival_date.strftime("%d.%m.%Y") %></div>
+        <div class="col-2 text-center"><strong>End</strong></div>
+        <div class="col-7"><%= @shipment.destination_location %></div>
+      </div>
       <% @shipment.scans.each_with_index do |scan, index| %>
-        <% unless index == 0  %>
-          <div class="row">
-            <div class="ms-3 col-3 border-end border-2 text-secondary" style="height: 30px;"></div>
-          </div>
-        <% end %>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-2 text-secondary d-flex justify-content-center" style="height: 30px;">
+          <div class="vr"></div>
+        </div>
+      </div>
         <div class="row">
           <div class="col-3 text-secondary"><%= scan.date.strftime("%d.%m.%Y") %></div>
-          <div class="col-1">•</div>
-          <div class="col-8"><%= scan.location %></div>
+          <div class="col-2 text-center">
+            <% if index.zero? %>
+              <i class="fa-solid fa-truck text-primary"></i>
+            <% else %>
+              <strong>•</strong>
+            <% end %>
+          </div>
+          <div class="col-7"><%= scan.location %></div>
         </div>
       <% end %>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-2 text-secondary d-flex justify-content-center" style="height: 30px;">
+          <div class="vr"></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3 text-secondary"><%= @shipment.start_date.strftime("%d.%m.%Y") %></div>
+        <div class="col-2 text-center"><strong>Start</strong></i></div>
+        <div class="col-7"><%= @shipment.starting_location %></div>
+      </div>
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h2 class="text-dark fw-bold"><%= @shipment.pallets.count %> Pallets</h2>
         <div class="d-flex gap-3 align-items-center">
@@ -76,14 +99,22 @@
         <%= link_to edit_pallet_path(pallet), class: "text-decoration-none" do %>
           <div class="row py-1 border border bg-white rounded-pill mt-2">
             <div class="col-3 text-secondary fs-6"><%= pallet.content %></div>
-            <div class="col-3 text-secondary fs-6"><%= @shipment.scans.first.date.strftime("%d.%m.%Y") %></div>
-            <div class="col-3 text-secondary fs-6 text-truncate"><%= @shipment.scans.first.location %></div>
-            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>"><%= @shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %></div>
+            <div class="col-3 text-secondary fs-6">
+              <% if @shipment.scans.count.positive? %>
+                <%= @shipment.scans.first.date.strftime("%d.%m.%Y") %>
+              <% end %>
+            </div>
+            <div class="col-3 text-secondary fs-6 text-truncate">
+              <% if @shipment.scans.count.positive? %>
+                <%= @shipment.scans.first.location %>
+              <% end %>
+            </div>
+            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>"><%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %></div>
           </div>
         <% end %>
       <% end %>
     </div>
-    <div class="col-12 col-lg-6 mt-5 position-sticky" style="top: 20px; height: fit-content;">
+    <div class="col-12 col-xl-6 mt-3 position-sticky" style="top: 20px; height: fit-content;">
       <h2 class="text-dark fw-bold">Track on map</h2>
       <div class="rounded-3" style="height: 90vh;"
         data-controller="mapbox"
