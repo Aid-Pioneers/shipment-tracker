@@ -8,6 +8,16 @@ class ShipmentsController < ApplicationController
   def create
     @shipment = Shipment.new(shipment_params)
     authorize @shipment
+
+    result_start = Geocoder.search(@shipment.starting_location)
+    result_destination = Geocoder.search(@shipment.destination_location)
+
+    @shipment.start_lat = result_start.first.latitude
+    @shipment.start_lon = result_start.first.longitude
+
+    @shipment.destination_lat = result_destination.first.latitude
+    @shipment.destination_lon = result_destination.first.longitude
+
     if @shipment.save
       redirect_to shipment_path(@shipment)
     else
@@ -18,15 +28,21 @@ class ShipmentsController < ApplicationController
   def show
     @shipment = Shipment.includes(:scans, :pallets).find(params[:id])
     authorize @shipment
-    @markers = @shipment.scans.map do |scan|
+    @markers = @shipment.scans.sort.map do |scan|
       {
         lat: scan.latitude,
-        lng: scan.longitude
+        lng: scan.longitude,
+        image_url: helpers.asset_url("location.svg")
       }
     end
+    if @markers.size.positive?
+      @markers.last[:image_url] = helpers.asset_url("location_in_transit.svg")
+    end
+    @markers.unshift({ lat: @shipment.start_lat, lng: @shipment.start_lon, image_url: helpers.asset_url("location_start.svg")})
+    @markers.push({ lat: @shipment.destination_lat, lng: @shipment.destination_lon, image_url: helpers.asset_url("location_destination.svg")})
   end
 
-  def index # missing some stuff
+  def index
     @shipments = policy_scope(Shipment)
     scans = @shipments.map do |shipment|
       shipment.scans
@@ -34,7 +50,9 @@ class ShipmentsController < ApplicationController
     @markers = scans.map do |scan|
       {
         lat: scan.latitude,
-        lng: scan.longitude
+        lng: scan.longitude,
+        image_url: helpers.asset_url(Shipment::SHIPMENT_STATUS[scan.shipment.status]),
+        href: shipment_path(scan.shipment)
       }
     end
 

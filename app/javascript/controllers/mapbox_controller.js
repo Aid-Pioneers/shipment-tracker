@@ -12,20 +12,36 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/starshipsssss/cl42fzh30002x14qlx9knq50y"
     })
 
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
-
   }
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      new mapboxgl.Marker()
-        .setLngLat([ marker.lng, marker.lat ])
+      // const popup = new mapboxgl.Popup().setHTML(marker.info_window)
+
+      // Create a HTML element for your custom marker
+      const customMarker = document.createElement("a")
+      customMarker.className = "marker"
+      customMarker.style.backgroundImage = `url('${marker.image_url}')`
+      customMarker.style.backgroundSize = "fill"
+      customMarker.style.backgroundRepeat = "no-repeat"
+      customMarker.style.width = "32.5px"
+      customMarker.style.height = "40px"
+      customMarker.style.paddingBottom = "51px"
+      customMarker.style.paddingRight = "1px"
+      customMarker.href = marker.href
+      // customMarker.sty
+
+      // Pass the element as an argument to the new marker
+      new mapboxgl.Marker(customMarker)
+        .setLngLat([marker.lng, marker.lat])
+        // .setPopup(popup)
         .addTo(this.map)
-    });
+    })
   }
 
   #fitMapToMarkers() {

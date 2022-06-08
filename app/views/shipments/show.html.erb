@@ -78,8 +78,8 @@
     <div class="col-12 col-lg-6 mt-5 position-sticky" style="top: 20px; height: fit-content;">
       <h2 class="text-dark fw-bold">Track on map</h2>
       <div class="rounded-3" style="height: 90vh;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+        data-controller="mapbox-show"
+        data-mapbox-show-markers-value="<%= @markers.to_json %>"
+        data-mapbox-show-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     </div>
   </div>
