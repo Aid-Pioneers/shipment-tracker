@@ -1,8 +1,8 @@
-<div class="body-container d-flex" data-controller="update-shipments">
+<div class="body-container container" data-controller="update-shipments">
   <div class="row">
-    <div>
+    <div class="col-12 col-xl-6">
       <div class="shipment-cards">
-        <div class="row d-flex mb-2">
+        <div class="mb-2">
           <h1 class="ship-title text-dark">Shipments</h1>
         </div>
         <div class="d-flex justify-content-evenly">
@@ -18,14 +18,14 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-6 pt-3 position-sticky" style="top: 20px; height: fit-content;">
-    <div class="text-center">
-      <h5 class="map-text text-dark">Track on map</h5>
-      <div style="width: 100%; height: 90vh;"
-        data-controller="mapbox"
-        data-mapbox-markers-value="<%= @markers.to_json %>"
-        data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+    <div class="col-12 col-xl-6 pt-3 position-sticky" style="top: 20px; height: fit-content;">
+      <div class="text-center">
+        <h5 class="map-text text-dark">Track on map</h5>
+        <div style="width: 100%; height: 90vh;"
+          data-controller="mapbox"
+          data-mapbox-markers-value="<%= @markers.to_json %>"
+          data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
       </div>
     </div>
   </div>
