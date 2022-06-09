@@ -11,7 +11,7 @@
     <% @projects.each do |project| %>
       <div class="col-12 col-md-6 col-xl-4">
         <%= link_to shipments_path do %>
-          <div class="project-card" style="background-image: url('<%= image_path "truck.jpg" %>');">
+          <div class="project-card" style="background-image: url('<%= image_path "#{project.name}.jpg" %>');">
             <div class="project-cards-container project-card-text-not-bootstrap">
               <h4><b><%= project.name %></b></h4>
             </div>
