@@ -17,7 +17,7 @@ $warning: #f0ad4e;
 
 .body-container {
   font-family: 'Poppins', sans-serif;
-  color: $dark-grey;
+  color: $grey;
 }
 
 .ship-title {
@@ -137,15 +137,13 @@ $warning: #f0ad4e;
 }
 
 .btn-worker {
-  color: $dark-grey;
   padding: 4px 16px;
-  border-radius: 8px;
+  border-radius: 12px;
   background: $white;
   transition: background 0.3s ease;
-  font-size: 10px;
+  font-size: 14px;
   display: inline-block;
   text-align: center;
-  font-weight: bold;
   border: 1px solid $grey;
   white-space: nowrap;
 }
@@ -177,3 +175,11 @@ $warning: #f0ad4e;
 // .fa-truck {
 //   font-size: 40px;
 // }
+
+.small-text-cards {
+  font-size: 14px;
+}
+
+.larger-text {
+  font-size: 18px;
+}
