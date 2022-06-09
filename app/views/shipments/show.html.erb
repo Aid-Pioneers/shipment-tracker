@@ -31,7 +31,7 @@
           </div>
         </div>
         <% if @shipment.scans.count.positive? %>
-          <div class="row">
+          <div class="row" title="<%= @shipment.scans.first.date.strftime("%F %T") %>">
             <div class="col-3">Last Scan</div>
             <div class="col-1">•</div>
             <div class="col-6"><%= @shipment.scans.first.date.strftime("%a %e %b") %></div>
@@ -59,7 +59,7 @@
           <div class="vr"></div>
         </div>
       </div>
-        <div class="row">
+        <div class="row" title="<%= scan.date.strftime("%F %T") %>">
           <div class="col-3 text-secondary"><%= scan.date.strftime("%d.%m.%Y") %></div>
           <div class="col-2 text-center">
             <% if index.zero? %>
