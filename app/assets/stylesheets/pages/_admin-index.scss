@@ -1,4 +1,5 @@
 $rich-black: #051224;
+$almost-black: #343a40;
 $dark-grey: #9198A3;
 $grey: #F1F1F1;
 $soft-grey: #FAFAFA;
@@ -11,6 +12,7 @@ $red: #800F2F;
 $light-red: #FFCCD5;
 $green-success: #5cb85c;
 $red-danger: #d9534f;
+$warning: #f0ad4e;
 
 .body-container {
   font-family: 'Poppins', sans-serif;
@@ -39,7 +41,7 @@ $red-danger: #d9534f;
 
 .shipment-cards {
   margin: 20px;
-  font-size: 13px;
+  font-size: 16px;
 }
 
 .card-product {
@@ -48,11 +50,11 @@ $red-danger: #d9534f;
 
 .btn-tabs-all {
   color: $white;
-  padding: 4px 16px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 4px;
   background: $yellow;
   transition: background 0.3s ease;
-  font-size: 12px;
+  font-size: 30px;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -65,8 +67,8 @@ $red-danger: #d9534f;
 
 .btn-tabs {
   color: $yellow;
-  padding: 4px 16px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 4px;
   background: $white;
   transition: background 0.3s ease;
   border: 1px solid $yellow;
@@ -74,6 +76,10 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
+}
+
+.btn-tabs-all:hover, .btn-tabs:hover, {
+  color: $warning;
 }
 
 .btn-active {
@@ -144,7 +150,7 @@ $red-danger: #d9534f;
 
 .btn-new-shipment {
   color: $rich-black;
-  padding: 8px 16px;
+  padding: 12px 20px;
   border-radius: 8px;
   background: $yellow;
   transition: background 0.3s ease;
@@ -156,13 +162,13 @@ $red-danger: #d9534f;
   border: 1px solid $yellow;
 }
 
-.map-text {
-  font-weight: 700;
+.btn-new-shipment:hover {
+  color: $almost-black;
 }
 
 .margin-class {
   margin-top: 45px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 

@@ -1,10 +1,10 @@
 <% shipments.each do |shipment| %>
   <%= link_to shipment_path(shipment), class: "text-decoration-none link-secondary" do %>
-  <div class="card-product m-2 p-4 border-0 shadow rounded">
+  <div class="card-product bg-white border border-2 rounded-3 p-3 mt-3">
   <div class="d-flex justify-content-between">
     <div class="card-infos d-flex flex-column">
-        <p class="ship-donor"><%= shipment.all_donors %></p>
-        <p class="ship-id-num fw-bold text-dark"><%= shipment.id %></p>
+        <p class="ship-donor mb-0"><%= shipment.all_donors %></p>
+        <p class="ship-id-num fw-bold text-dark mb-0"><%= shipment.id %></p>
       </div>
       <div class="card-infos d-flex flex-column">
         <% if shipment.status == "in_preparation" %>
@@ -37,7 +37,7 @@
           <% if shipment.scans.empty? %>
            <p> There is no scan yet for this shipment! </p>
           <% else %>
-            <p><%= shipment.scans.last.location %></p>
+            <p><%= shipment.scans.first.location %></p>
           <% end %>
         </div>
         <div class="d-flex justify-content-end align-items-end">
