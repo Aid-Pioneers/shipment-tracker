@@ -26,7 +26,15 @@
             <div class="text-dark fw-bold fs-4"><%= @shipment.id %></div>
           </div>
           <div class="text-end">
-            <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div>
+            <% if @shipment.status == "in_transit" %>
+              <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div>
+            <% elsif @shipment.status == "in_preparation" %>
+              <div class="px-3 py-1 rounded-pill bg-secondary text-secondary" style="--bs-bg-opacity: .15;">Preparation</div>
+            <% elsif @shipment.status == "delivered" %>
+              <div class="px-3 py-1 rounded-pill bg-success text-success" style="--bs-bg-opacity: .15;">Delivered</div>
+            <% elsif @shipment.status == "problematic" %>
+              <div class="px-3 py-1 rounded-pill bg-danger text-danger" style="--bs-bg-opacity: .15;">Problematic</div>
+            <% end %>
             <div class="text-secondary mt-1"><%= @shipment.pallets.count %> pallets</div>
           </div>
         </div>
