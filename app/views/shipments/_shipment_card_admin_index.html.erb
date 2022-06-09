@@ -16,7 +16,11 @@
         <% elsif shipment.status == "problematic" %>
           <p class="btn-problem"> Problematic </p>
         <% end %>
+        <% if shipment.pallets.count < 2 %>
+        <p class="ship-pallet-count"><%= shipment.pallets.count%> pallet</p>
+        <% else %>
         <p class="ship-pallet-count"><%= shipment.pallets.count%> pallets</p>
+        <% end %>
       </div>
     </div>
 
