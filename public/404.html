@@ -4,6 +4,14 @@
   <title>This page doesn't exist.</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
+
+  body {
+    background-image: url('404-image.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
   .rails-default-error-page {
     background-color: #EFEFEF;
     color: #2E2F30;
@@ -56,11 +64,9 @@
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>This page doesn't exist.</h1>
-    </div>
-    <p>If you think this is an error contact <a href="mailto:finn.stuerenburg@aidpioneers.com">finn.stuerenburg@aidpioneers.com</a>.</p>
+  <div>
+    <h2 class="text-dark fw-bold">This page doesn't exist.</h2>
+    <h3 class="text-dark fw-bold">If you think this is an error contact <a href="mailto:finn.stuerenburg@aidpioneers.com">finn.stuerenburg@aidpioneers.com</a>.</h3>
   </div>
 </body>
 </html>
