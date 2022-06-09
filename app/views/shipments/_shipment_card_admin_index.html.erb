@@ -1,55 +1,53 @@
 <% shipments.each do |shipment| %>
   <%= link_to shipment_path(shipment), class: "text-decoration-none link-secondary" do %>
-  <div class="card-product bg-white border border-2 rounded-3 p-3 mt-3">
-  <div class="d-flex justify-content-between">
-    <div class="card-infos d-flex flex-column">
-        <p class="ship-donor mb-0"><%= shipment.all_donors %></p>
-        <p class="ship-id-num fw-bold text-dark mb-0"><%= shipment.id %></p>
-      </div>
-      <div class="card-infos d-flex flex-column">
-        <% if shipment.status == "in_preparation" %>
-          <p class="btn-in-preparation"> In preparation </p>
-        <% elsif shipment.status == "in_transit" %>
-          <p class="btn-active"> Active </p>
-        <% elsif shipment.status == "delivered" %>
-          <p class="btn-delivered"> Delivered </p>
-        <% elsif shipment.status == "problematic" %>
-          <p class="btn-problem"> Problematic </p>
-        <% end %>
-        <% if shipment.pallets.count < 2 %>
-        <p class="ship-pallet-count"><%= shipment.pallets.count%> pallet</p>
-        <% else %>
-        <p class="ship-pallet-count"><%= shipment.pallets.count%> pallets</p>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="d-flex flex-column mt-4">
-      <div class="card-infos d-flex justify-content-between">
-        <div class="d-flex flex-column">
-          <p>Last scan</p>
-          <p>Location<p>
+    <div class="bg-white border border-2 rounded-3 p-3 mt-3">
+      <div class="d-flex justify-content-between">
+        <div>
+          <div class="larger-text"><%= shipment.all_donors %></div>
+          <div class="text-dark fw-bold fs-4"><%= shipment.id %></div>
         </div>
-        <div class="d-flex flex-column text-dark">
-          <p> • </p>
-          <p> • </p>
+        <div class="text-end">
+          <%# <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div> %>
+          <div>
+            <% if shipment.status == "in_preparation" %>
+              <p class="px-3 py-1 rounded-pill bg-primary text-primary fw-bold mb-0" style="--bs-bg-opacity: .15;"> In preparation </p>
+            <% elsif shipment.status == "in_transit" %>
+              <p class="px-3 py-1 rounded-pill bg-primary text-primary fw-bold mb-0" style="--bs-bg-opacity: .15;">Active</p>
+            <% elsif shipment.status == "delivered" %>
+              <p class="px-3 py-1 rounded-pill bg-success text-success fw-bold mb-0" style="--bs-bg-opacity: .15;">Delivered</p>
+            <% elsif shipment.status == "problematic" %>
+              <p class="px-3 py-1 rounded-pill bg-danger text-danger fw-bold mb-0" style="--bs-bg-opacity: .15;">Problematic</p>
+            <% end %>
+          </div>
+          <div class="mt-1">
+            <% if shipment.pallets.count == 1 %>
+            <p class="larger-text"><%= shipment.pallets.count%> Pallet</p>
+            <% else %>
+            <p class="larger-text"><%= shipment.pallets.count%> Pallets</p>
+            <% end %>
+          </div>
         </div>
-        <div class="d-flex flex-column text-dark">
-          <% unless shipment.scans.empty? %>
-           <p><%= shipment.scans.last.date.strftime("%a %e %b") %></p>
-          <% end %>
-          <% if shipment.scans.empty? %>
-           <p> There is no scan yet for this shipment! </p>
+      </div>
+      <br>
+      <div class="d-flex justify-content-between">
+        <div>
+          <% if shipment.scans.count.positive? %>
+            <div class="row" title="<%= shipment.scans.first.date.strftime("%F %T") %>">
+              <div class="col-4 small-text-cards">Last Scan</div>
+              <div class="col-2 text-dark">•</div>
+              <div class="col-5 text-dark small-text-cards"><%= shipment.scans.first.date.strftime("%a %e %b") %></div>
+              <div class="col-4 small-text-cards">Location</div>
+              <div class="col-2 text-dark">•</div>
+              <div class="col-5 text-dark small-text-cards text-truncate"><%= shipment.scans.first.location %></div>
+            </div>
           <% else %>
-            <p><%= shipment.scans.first.location %></p>
+            <h2 class="fw-bold text-secondary text-center">no scans yet</h2>
           <% end %>
         </div>
-        <div class="d-flex justify-content-end align-items-end">
-          <p class="btn-worker"> Managed by <%= shipment.user.first_name %> </p>
+        <div class="d-flex">
+          <div class="btn-worker align-self-end">Managed by <%= shipment.user.full_name %></div>
         </div>
       </div>
     </div>
-
-  </div>
   <% end %>
 <% end %>
