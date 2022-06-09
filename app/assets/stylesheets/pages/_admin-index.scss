@@ -1,4 +1,5 @@
 $rich-black: #051224;
+$almost-black: #343a40;
 $dark-grey: #9198A3;
 $grey: #F1F1F1;
 $soft-grey: #FAFAFA;
@@ -11,6 +12,7 @@ $red: #800F2F;
 $light-red: #FFCCD5;
 $green-success: #5cb85c;
 $red-danger: #d9534f;
+$warning: #f0ad4e;
 
 .body-container {
   font-family: 'Poppins', sans-serif;
@@ -74,6 +76,10 @@ $red-danger: #d9534f;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
+}
+
+.btn-tabs-all:hover, .btn-tabs:hover, {
+  color: $warning;
 }
 
 .btn-active {
@@ -154,6 +160,10 @@ $red-danger: #d9534f;
   text-align: center;
   white-space: nowrap;
   border: 1px solid $yellow;
+}
+
+.btn-new-shipment:hover {
+  color: $almost-black;
 }
 
 .map-text {
