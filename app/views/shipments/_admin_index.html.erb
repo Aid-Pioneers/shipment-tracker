@@ -22,7 +22,7 @@
         <%= link_to '<button class="btn-new-shipment">New Shipment</button>'.html_safe, new_shipment_path %>
       </div>
       <div>
-        <h5 class="map-text fw-bold text-dark margin-class">Track on map</h5>
+        <h2 class="fw-bold text-dark margin-class">Track on map</h2>
         <div style="width: 100%; height: 90vh;"
           data-controller="mapbox"
           data-mapbox-markers-value="<%= @markers.to_json %>"
