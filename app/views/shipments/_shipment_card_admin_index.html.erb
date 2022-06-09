@@ -3,8 +3,8 @@
   <div class="card-product bg-white border border-2 rounded-3 p-3 mt-3">
   <div class="d-flex justify-content-between">
     <div class="card-infos d-flex flex-column">
-        <p class="ship-donor"><%= shipment.all_donors %></p>
-        <p class="ship-id-num fw-bold text-dark"><%= shipment.id %></p>
+        <p class="ship-donor mb-0"><%= shipment.all_donors %></p>
+        <p class="ship-id-num fw-bold text-dark mb-0"><%= shipment.id %></p>
       </div>
       <div class="card-infos d-flex flex-column">
         <% if shipment.status == "in_preparation" %>
