@@ -36,10 +36,12 @@
 
 .active {
   color: $aidpioneers;
+  cursor: pointer;
 }
 
 .inactive {
   color: #9198A3;
+  cursor: pointer;
 }
 
 .btn-logout {
