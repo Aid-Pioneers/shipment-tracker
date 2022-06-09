@@ -58,6 +58,11 @@ $red-danger: #d9534f;
   white-space: nowrap;
 }
 
+.active-color {
+  color: $white !important;
+  background-color: $yellow !important;
+}
+
 .btn-tabs {
   color: $yellow;
   padding: 4px 16px;
