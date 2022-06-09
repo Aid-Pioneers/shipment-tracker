@@ -6,11 +6,11 @@
           <h1 class="ship-title text-dark">Shipments</h1>
         </div>
         <div class="d-flex justify-content-evenly mb-3">
-          <h5 class="btn-tabs-all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
-          <h5 class="btn-tabs" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
-          <h5 class="btn-tabs" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
-          <h5 class="btn-tabs" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
-          <h5 class="btn-tabs" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
+          <h5 class="btn-tabs active-color" data-update-shipments-target="all" data-shipment="all" data-action="click->update-shipments#update">All</h5>
+          <h5 class="btn-tabs" data-update-shipments-target="in_transit" data-shipment="in_transit" data-action="click->update-shipments#update">Active</h5>
+          <h5 class="btn-tabs" data-update-shipments-target="in_preparation" data-shipment="in_preparation" data-action="click->update-shipments#update">In preparation</h5>
+          <h5 class="btn-tabs" data-update-shipments-target="delivered" data-shipment="delivered" data-action="click->update-shipments#update">Delivered</h5>
+          <h5 class="btn-tabs" data-update-shipments-target="problematic" data-shipment="problematic" data-action="click->update-shipments#update">Problem</h5>
         </div>
         <div data-update-shipments-target="list">
           <%= render "shipment_card_admin_index", shipments: shipments %>
