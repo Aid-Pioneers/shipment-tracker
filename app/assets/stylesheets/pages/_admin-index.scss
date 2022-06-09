@@ -48,11 +48,11 @@ $red-danger: #d9534f;
 
 .btn-tabs-all {
   color: $white;
-  padding: 4px 16px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 4px;
   background: $yellow;
   transition: background 0.3s ease;
-  font-size: 12px;
+  font-size: 30px;
   display: inline-block;
   text-align: center;
   white-space: nowrap;
@@ -65,8 +65,8 @@ $red-danger: #d9534f;
 
 .btn-tabs {
   color: $yellow;
-  padding: 4px 16px;
-  border-radius: 8px;
+  padding: 8px 20px;
+  border-radius: 4px;
   background: $white;
   transition: background 0.3s ease;
   border: 1px solid $yellow;
@@ -144,7 +144,7 @@ $red-danger: #d9534f;
 
 .btn-new-shipment {
   color: $rich-black;
-  padding: 8px 16px;
+  padding: 12px 20px;
   border-radius: 8px;
   background: $yellow;
   transition: background 0.3s ease;
@@ -157,7 +157,7 @@ $red-danger: #d9534f;
 }
 
 .map-text {
-  font-weight: 700;
+  font-weight: 900;
 }
 
 .margin-class {
