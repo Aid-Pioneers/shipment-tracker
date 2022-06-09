@@ -44,9 +44,10 @@ class ShipmentsController < ApplicationController
 
   def index
     @shipments = policy_scope(Shipment)
-    scans = @shipments.map do |shipment|
-      shipment.scans
-    end.flatten
+    scans = []
+    @shipments.each do |shipment|
+        scans << shipment.scans.last if shipment.scans.size.positive?
+    end
     @markers = scans.map do |scan|
       {
         lat: scan.latitude,
