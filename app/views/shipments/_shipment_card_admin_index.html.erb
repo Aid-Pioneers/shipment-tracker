@@ -10,13 +10,13 @@
           <%# <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div> %>
           <div>
             <% if shipment.status == "in_preparation" %>
-              <p class="px-3 py-1 rounded-pill bg-primary text-primary fw-bold mb-0" style="--bs-bg-opacity: .15;"> In preparation </p>
+              <p class="px-3 py-1 rounded-pill bg-grey text-text-color fw-bold mb-0" style="--bs-bg-opacity: .15; background-color: #F1F1F1;"> In preparation </p>
             <% elsif shipment.status == "in_transit" %>
               <p class="px-3 py-1 rounded-pill bg-primary text-primary fw-bold mb-0" style="--bs-bg-opacity: .15;">Active</p>
             <% elsif shipment.status == "delivered" %>
               <p class="px-3 py-1 rounded-pill bg-success text-success fw-bold mb-0" style="--bs-bg-opacity: .15;">Delivered</p>
             <% elsif shipment.status == "problematic" %>
-              <p class="px-3 py-1 rounded-pill bg-danger text-danger fw-bold mb-0" style="--bs-bg-opacity: .15;">Problematic</p>
+              <p class="px-3 py-1 rounded-pill bg-danger text-danger fw-bold mb-0" style="--bs-bg-opacity: .15;">Problem</p>
             <% end %>
           </div>
           <div class="mt-1">
