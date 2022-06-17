@@ -52,3 +52,10 @@
 .btn-img {
   margin-right: 10px;
 }
+
+.sidenav-toggle {
+  position: fixed;
+  left: 1em;
+  top: 1em;
+  z-index: 10;
+}

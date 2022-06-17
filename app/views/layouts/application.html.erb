@@ -41,15 +41,17 @@
   </head>
 
   <body>
-    <% if !user_signed_in? %>
-      <%= yield %>
-    <% elsif request.path == "/"  %>
+    <% if request.path == "/"  %>
       <%= render 'shared/navbar' %>
+      <%= yield %>
+    <% elsif request.path.start_with? "/users/" %>
       <%= yield %>
     <% else %>
       <div class="common-div">
         <%= render 'shared/sidenav' %>
-        <%= yield %>
+        <div class="mt-5 flex-grow-1">
+          <%= yield %>
+        </div>
       </div>
     <%end%>
     <%= render 'shared/flashes' %>
