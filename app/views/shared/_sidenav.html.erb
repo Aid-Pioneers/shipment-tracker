@@ -6,8 +6,10 @@
     <div class="sidenav">
       <div>
         <div class="user-info">
-          <h3><%= current_user.first_name  %> <%= current_user.last_name  %></h3>
-          <p><%= current_user.email %></p>
+          <% if user_signed_in? %>
+            <h3><%= current_user.first_name  %> <%= current_user.last_name  %></h3>
+            <p><%= current_user.email %></p>
+          <% end %>
         </div>
         <div class="projects">
           <p class="bold">Projects</p>
@@ -21,8 +23,14 @@
         </div>
       </div>
       <div>
-        <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-logout" do  %>
-          <%= image_tag "logout.png", class: "btn-img" %>Log out
+        <% if user_signed_in? %>
+          <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-secondary" do  %>
+            <%= image_tag "logout.png", class: "btn-img" %>Log out
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class: "btn btn-primary" do  %>
+            <%= image_tag "logout.png", class: "btn-img" %>Log in
+          <% end %>
         <% end %>
       </div>
     </div>
