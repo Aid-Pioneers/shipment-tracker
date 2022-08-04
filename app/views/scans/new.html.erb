@@ -1,68 +1,85 @@
 <div class="container">
-<br>
-  <p>Click the button to send your coordinates. We do not collect personal data, sending your location is anonymous.</p>
-
+  <br>
+  <h1 class="text-dark fw-bold">Shipment <%= @shipment.id %></h1>
+  <ul class="list-group">
+    <li class="list-group-item d-flex gap-2 align-items-center">
+      <span class="fs-4">🇬🇧</span>
+      Click the button to send your coordinates. We do not collect personal data, sending your location is anonymous.
+    </li>
+    <li class="list-group-item d-flex gap-2 align-items-center">
+      <span class="fs-4">🇵🇱</span>
+      Kliknij przycisk, aby wysłać swoje współrzędne. Nie zbieramy danych osobowych, wysyłanie Twojej lokalizacji jest anonimowe.
+    </li>
+    <li class="list-group-item d-flex gap-2 align-items-center">
+      <span class="fs-4">🇺🇦</span>
+      Натисніть кнопку, щоб надіслати свої координати. Ми не збираємо особисті дані, надсилання даних про ваше місцезнаходження є анонімним.
+    </li>
+    <li class="list-group-item d-flex gap-2 align-items-center">
+      <span class="fs-4">🇷🇺</span>
+      Нажмите кнопку, чтобы отправить свои координаты. Мы не собираем личные данные, отправка вашего местоположения анонимна.
+    </li>
+  </ul>
   <p id="shipment" data-shipment="<%= @shipment.id %>"></p>
-
-  <button class="btn btn-primary" onclick="getLocation()">Share Location</button>
-
-  <p id="geolocation"></p>
+  <div class="alert alert-danger d-none" id="geolocation" role="alert"></div>
+  <button class="btn btn-lg btn-primary w-100" onclick="getLocation()">Share Location</button>
 </div>
-
 <script>
-let x = document.getElementById("geolocation");
+  let x = document.getElementById("geolocation");
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
+  function setError(error) {
+    x.innerHTML = error;
+    x.classList.remove("d-none");
   }
-}
 
-function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
-  const id = document.getElementById("shipment");
-  const csrfToken = document.querySelector("[name='csrf-token']").content
-  fetch("/shipments/" + id.dataset.shipment + "/scans", {
-    method: "POST",
-    headers: {
-      "X-CSRF-Token": csrfToken, // Set the token
-      "Content-Type": "application/json",
-      "Accept": "application/json"
-    },
-    body: JSON.stringify({scan: { latitude: position.coords.latitude, longitude: position.coords.longitude, sticker_destroyed: false}})
-  })
-    .then(response => response.json())
-    .then((data) => {
-      if (data.shipment) {
-        x.classList.add("text-danger");
-        x.innerHTML = "Error submitting location";
-      } else {
-        location.href = "/success"
-      }
-    }).catch(error => console.log(error))
-}
-
-function showError(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred."
-      break;
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
   }
-}
 
-// fetch request to the create of the scan (that we are going to do now)
-// see ajax lesson
+  function showPosition(position) {
+    x.innerHTML = "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+    const id = document.getElementById("shipment");
+    const csrfToken = document.querySelector("[name='csrf-token']").content
+    fetch("/shipments/" + id.dataset.shipment + "/scans", {
+      method: "POST",
+      headers: {
+        "X-CSRF-Token": csrfToken, // Set the token
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({scan: { latitude: position.coords.latitude, longitude: position.coords.longitude, sticker_destroyed: false}})
+    })
+      .then(response => response.json())
+      .then((data) => {
+        if (data.shipment) {
+          setError("Error submitting location");
+        } else {
+          location.href = "/success"
+        }
+      }).catch(error => console.log(error))
+  }
 
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        setError("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        setError("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        setError("The request to get user location timed out.");
+        break;
+      case error.UNKNOWN_ERROR:
+        setError("An unknown error occurred.");
+        break;
+    }
+  }
+
+  // fetch request to the create of the scan (that we are going to do now)
+  // see ajax lesson
 </script>
