@@ -31,6 +31,13 @@ A product that gets truck locations and shipment-info like routes, content and I
 5. Run: `rails db:prepare RAILS_ENV=development`
 6. Run dev server using `rails s`
 
+## Running the tests
+In order to run the tests, run the following:
+
+```shell
+ rails test:all
+```
+
 ## Useful tips
 If you want to debug your local development database then install [psql](https://formulae.brew.sh/formula/postgresql) and run the following command:
 
