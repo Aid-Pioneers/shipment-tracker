@@ -44,17 +44,23 @@ class ShipmentsController < ApplicationController
 
   def index
     @shipments = policy_scope(Shipment)
-    scans = []
-    @shipments.each do |shipment|
-        scans << shipment.scans.last if shipment.scans.size.positive?
-    end
-    @markers = scans.map do |scan|
-      {
-        lat: scan.latitude,
-        lng: scan.longitude,
-        image_url: helpers.asset_url(Shipment::SHIPMENT_STATUS[scan.shipment.status]),
-        href: shipment_path(scan.shipment)
-      }
+
+    @markers = @shipments.map do |shipment|
+      if shipment.scans.size.positive?
+        {
+          lat: shipment.scans.last.latitude,
+          lng: shipment.scans.last.longitude,
+          image_url: helpers.asset_url(Shipment::SHIPMENT_STATUS[shipment.status]),
+          href: shipment_path(shipment)
+        }
+      else
+        {
+          lat: shipment.start_lat,
+          lng: shipment.start_lon,
+          image_url: helpers.asset_url(Shipment::SHIPMENT_STATUS[shipment.status]),
+          href: shipment_path(shipment)
+        }
+      end
     end
 
     if params[:query].present? && params[:query] != "all"
