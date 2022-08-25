@@ -1,46 +1,29 @@
 <div class="container">
   <br>
-  <h1 class="text-dark fw-bold">Shipment <%= @shipment.id %></h1>
-  <ul class="list-group">
-    <li class="list-group-item d-flex gap-2 align-items-center">
-      <span class="fs-4">🇬🇧</span>
-      Click the button to send your coordinates. We do not collect personal data, sending your location is anonymous.
-    </li>
-    <li class="list-group-item d-flex gap-2 align-items-center">
-      <span class="fs-4">🇵🇱</span>
-      Kliknij przycisk, aby wysłać swoje współrzędne. Nie zbieramy danych osobowych, wysyłanie Twojej lokalizacji jest anonimowe.
-    </li>
-    <li class="list-group-item d-flex gap-2 align-items-center">
-      <span class="fs-4">🇺🇦</span>
-      Натисніть кнопку, щоб надіслати свої координати. Ми не збираємо особисті дані, надсилання даних про ваше місцезнаходження є анонімним.
-    </li>
-    <li class="list-group-item d-flex gap-2 align-items-center">
-      <span class="fs-4">🇷🇺</span>
-      Нажмите кнопку, чтобы отправить свои координаты. Мы не собираем личные данные, отправка вашего местоположения анонимна.
-    </li>
-  </ul>
+  <h1 class="text-dark fw-bold"><%= t 'shipment' %> <%= @shipment.id %></h1>
+  <p><%= t :geo_request %></p>
   <p id="shipment" data-shipment="<%= @shipment.id %>"></p>
   <div class="alert alert-danger d-none" id="geolocation" role="alert"></div>
-  <button class="btn btn-lg btn-primary w-100" onclick="getLocation()">Share Location</button>
+  <button class="btn btn-lg btn-primary w-100" onclick="getLocation()"><%= t 'share_location' %></button>
 </div>
 <script>
-  let x = document.getElementById("geolocation");
+  let alert = document.getElementById("geolocation");
 
   function setError(error) {
-    x.innerHTML = error;
-    x.classList.remove("d-none");
+    alert.innerHTML = error;
+    alert.classList.remove("d-none");
   }
 
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+      alert.innerHTML = "Geolocation is not supported by this browser.";
     }
   }
 
   function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
+    alert.innerHTML = "Latitude: " + position.coords.latitude +
     "<br>Longitude: " + position.coords.longitude;
     const id = document.getElementById("shipment");
     const csrfToken = document.querySelector("[name='csrf-token']").content
