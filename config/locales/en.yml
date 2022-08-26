@@ -30,4 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  shipment: "Shipment"
+  geo_request: "Click the button to send your coordinates. We do not collect personal data, sending your location is anonymous."
+  share_location: "Share Location"
+  thank_you: "Thank you!"
+  success_description: "Your location was successfully submitted."
