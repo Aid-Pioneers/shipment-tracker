@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_105721) do
+ActiveRecord::Schema.define(version: 2022_09_18_111446) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "pallet_scans", force: :cascade do |t|
@@ -73,6 +74,8 @@ ActiveRecord::Schema.define(version: 2022_06_07_105721) do
     t.string "start_lon"
     t.string "destination_lat"
     t.string "destination_lon"
+    t.uuid "exid", default: -> { "gen_random_uuid()" }, null: false
+    t.index ["exid"], name: "index_shipments_on_exid"
     t.index ["project_id"], name: "index_shipments_on_project_id"
     t.index ["user_id"], name: "index_shipments_on_user_id"
   end
