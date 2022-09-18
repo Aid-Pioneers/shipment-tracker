@@ -3,7 +3,7 @@ class ScansController < ApplicationController
 
   def new
     @scan = Scan.new
-    @shipment = Shipment.find(params[:shipment_id])
+    @shipment = Shipment.find_by(exid: params[:shipment_id])
     authorize @scan
   end
 
