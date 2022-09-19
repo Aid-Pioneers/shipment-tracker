@@ -85,7 +85,7 @@ class ShipmentsController < ApplicationController
   def qr
     @shipment = Shipment.find(params[:shipment_id])
     authorize @shipment
-    send_data RQRCode::QRCode.new(new_shipment_scan_url(@shipment)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
+    send_data RQRCode::QRCode.new(new_shipment_scan_url(@shipment.exid)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
   end
 
   private
