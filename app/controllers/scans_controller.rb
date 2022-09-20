@@ -3,13 +3,13 @@ class ScansController < ApplicationController
 
   def new
     @scan = Scan.new
-    @shipment = Shipment.find(params[:shipment_id])
+    @shipment = find_shipment
     authorize @scan
   end
 
   def create
     @scan = Scan.new(scan_params)
-    @shipment = Shipment.find(params[:shipment_id])
+    @shipment = find_shipment
     @scan.shipment = @shipment
     @scan.date = DateTime.now
     authorize @scan
@@ -30,5 +30,9 @@ class ScansController < ApplicationController
 
   def scan_params
     params.require(:scan).permit(:sticker_destroyed, :latitude, :longitude)
+  end
+
+  def find_shipment
+    Shipment.find_by(exid: params[:shipment_id])
   end
 end
