@@ -1,7 +1,7 @@
 <div class="container">
   <h1 class="text-dark fw-bold mt-4"><%= t 'shipment' %> <%= @shipment.id %></h1>
   <p><%= t :geo_request %></p>
-  <p id="shipment" data-shipment="<%= @shipment.id %>"></p>
+  <p id="shipment" data-shipment="<%= @shipment.exid %>"></p>
   <div class="alert alert-danger d-none" id="geolocation" role="alert"></div>
   <button class="btn btn-lg btn-primary w-100" onclick="getLocation()"><%= t 'share_location' %></button>
 </div>
