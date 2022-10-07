@@ -40,6 +40,32 @@ class ShipmentsController < ApplicationController
     end
     @markers.unshift({ lat: @shipment.start_lat, lng: @shipment.start_lon, image_url: helpers.asset_url("location_start.svg")})
     @markers.push({ lat: @shipment.destination_lat, lng: @shipment.destination_lon, image_url: helpers.asset_url("location_destination.svg")})
+
+    unless @shipment.pallets.nil?
+      @markers_pallets = @shipment.pallets.map do |pallet|
+        if pallet.pallet_scans.last.nil?
+          unless @shipment.scans.last.nil?
+            {
+              lat: @shipment.scans.last.latitude,
+              lng: @shipment.scans.last.longitude,
+              image_url: helpers.asset_url("location_pallet.svg")
+            }
+          else
+            {
+              lat: @shipment.start_lat,
+              lng: @shipment.start_lon,
+              image_url: helpers.asset_url("location_pallet.svg")
+            }
+          end
+        else
+          {
+            lat: pallet.pallet_scans.last.latitude,
+            lng: pallet.pallet_scans.last.longitude,
+            image_url: helpers.asset_url("location_pallet.svg")
+          }
+        end
+      end
+    end
   end
 
   def index
