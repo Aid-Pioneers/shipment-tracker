@@ -111,12 +111,16 @@
               <% end %>
             </div>
             <div class="col-3 text-secondary fs-6">
-              <% if @shipment.scans.count.positive? %>
+              <% if pallet.pallet_scans.count.positive? %>
+                <%= pallet.pallet_scans.first.date.strftime("%d.%m.%Y") %>
+              <% elsif @shipment.scans.count.positive? %>
                 <%= @shipment.scans.first.date.strftime("%d.%m.%Y") %>
               <% end %>
             </div>
             <div class="col-3 text-secondary fs-6 text-truncate">
-              <% if @shipment.scans.count.positive? %>
+              <% if pallet.pallet_scans.count.positive? %>
+                <%= pallet.pallet_scans.first.location %>
+              <% elsif @shipment.scans.count.positive? %>
                 <%= @shipment.scans.first.location %>
               <% end %>
             </div>
