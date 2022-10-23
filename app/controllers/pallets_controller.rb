@@ -58,7 +58,7 @@ class PalletsController < ApplicationController
   def qr
     @pallet = Pallet.find(params[:pallet_id])
     authorize @pallet
-    send_data RQRCode::QRCode.new(new_pallet_pallet_scan_url(@shipment, @pallet)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
+    send_data RQRCode::QRCode.new(new_pallet_pallet_scan_url(@pallet)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
   end
 
   private
