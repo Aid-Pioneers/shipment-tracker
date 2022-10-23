@@ -93,20 +93,23 @@
       <div class="d-flex justify-content-between align-items-center mt-5">
         <h2 class="text-dark fw-bold"><%= @shipment.pallets.count %> Pallets</h2>
         <div class="d-flex gap-3 align-items-center">
+          <div class="px-3 py-1 rounded-pill bg-secondary text-secondary fw-bold m-0" style="--bs-bg-opacity: .15;">Add Pallets</div>
           <%= link_to "+", new_shipment_pallet_path(@shipment), class: "btn btn-primary" %>
-          <div class="px-3 py-1 rounded-pill bg-secondary text-secondary fw-bold m-0" style="--bs-bg-opacity: .15;">Pallets tracked together</div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-3 text-dark fs-5">Content</div>
         <div class="col-3 text-dark fs-5">Last Scan</div>
         <div class="col-3 text-dark fs-5">Location</div>
-        <div class="col-3 text-dark fs-5 text-center">Status</div>
+        <div class="col-3 text-dark fs-5 text-center">QR Code</div>
       </div>
       <% @shipment.pallets.each do |pallet| %>
-        <%= link_to edit_pallet_path(pallet), class: "text-decoration-none" do %>
           <div class="row py-1 border border bg-white rounded-pill mt-2">
-            <div class="col-3 text-secondary fs-6"><%= pallet.content %></div>
+            <div class="col-3 text-secondary fs-6">
+              <%= link_to edit_pallet_path(pallet), class: "text-decoration-none text-secondary" do %>
+                <%= pallet.content %>
+              <% end %>
+            </div>
             <div class="col-3 text-secondary fs-6">
               <% if @shipment.scans.count.positive? %>
                 <%= @shipment.scans.first.date.strftime("%d.%m.%Y") %>
@@ -117,9 +120,13 @@
                 <%= @shipment.scans.first.location %>
               <% end %>
             </div>
-            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>"><%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %></div>
+            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>">
+              <%= link_to pallet_qr_path(pallet), class: "text-decoration-none text-success fw-bold" do %>
+                <%# <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %>
+                <i class="fa-solid fa-qrcode"></i> QR
+              <% end %>
+            </div>
           </div>
-        <% end %>
       <% end %>
     </div>
     <div class="col-12 col-xl-6 mt-3 position-sticky" style="top: 20px; height: fit-content;">
