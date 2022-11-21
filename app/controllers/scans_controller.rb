@@ -8,6 +8,7 @@ class ScansController < ApplicationController
   end
 
   def create
+
     @scan = Scan.new(scan_params)
     @shipment = find_shipment
     @scan.shipment = @shipment
