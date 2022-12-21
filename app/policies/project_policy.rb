@@ -2,16 +2,12 @@ class ProjectPolicy < ApplicationPolicy
   class Scope < Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      if user.donor?
-        scope.where(user: user)
-      else
+      if user.admin?
         scope.all
+      else
+        scope.where(user: user)
       end
     end
-  end
-
-  def new?
-    user.admin?
   end
 
   def create?
