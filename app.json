@@ -24,6 +24,12 @@
   ],
   "environments": {
     "test": {
+      "formation": {
+        "test": {
+          "quantity": 1,
+          "size": "standard-2x"
+        }
+      },
       "env": { "POSTGRESQL_VERSION": "14" },
       "addons": ["heroku-postgresql:in-dyno"]
     }
