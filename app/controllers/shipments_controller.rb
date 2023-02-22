@@ -128,7 +128,8 @@ class ShipmentsController < ApplicationController
     qrCode.save(qrCodeFilename)
 
     qrPdf = Prawn::Document.new
-    qrPdf.text "Shipment #{@shipment.exid} from #{@shipment.starting_location} to #{@shipment.destination_location}"
+    qrPdf.text "Shipment #{@shipment.exid}"
+    qrPdf.text "#{@shipment.starting_location} to #{@shipment.destination_location}"
     qrPdf.image qrCodeFilename
     
     send_data qrPdf.render(), type: 'application/pdf', disposition: 'attachment'
