@@ -1,4 +1,7 @@
 require 'rqrcode'
+require 'prawn'
+require 'stringio'
+
 class ShipmentsController < ApplicationController
   def new
     @shipment = Shipment.new
@@ -118,7 +121,12 @@ class ShipmentsController < ApplicationController
   def qr
     @shipment = Shipment.find(params[:shipment_id])
     authorize @shipment
-    send_data RQRCode::QRCode.new(new_shipment_scan_url(@shipment.exid)).as_png(size: 800), type: 'image/png', disposition: 'attachment'
+    qrCode = RQRCode::QRCode.new(new_shipment_scan_url(@shipment.exid)).as_png(size: 800)
+    qrPdf = Prawn::Document.new
+    qrPdf.text "Shipment #{@shipment.exid} from #{@shipment.starting_location} to #{@shipment.destination_location}"
+    qrPdf.image StringIO.new(qrCode)
+    
+    send_data qrPdf.render(), type: 'application/pdf', disposition: 'attachment'
   end
 
   private
