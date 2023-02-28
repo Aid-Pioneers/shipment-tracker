@@ -1,5 +1,6 @@
 require 'rqrcode'
 require 'prawn'
+require 'stringio'
 
 class ShipmentsController < ApplicationController
   def new
@@ -119,20 +120,22 @@ class ShipmentsController < ApplicationController
 
   def qr
     @shipment = Shipment.find(params[:shipment_id])
+    project_id = @shipment.project_id
+    @project = Project.find(project_id)
     authorize @shipment
-    qrCodeFilename = "Shipment-#{@shipment.exid}.png"
+
     qrCode = RQRCode::QRCode.new(new_shipment_scan_url(@shipment.exid)).as_png(size: 800)
-    # This is just excessive
-    # There should be a way to embed the image without saving it to the filesystem first
-    # If we go this route and start saving images we need to start cleaning them as well
-    qrCode.save(qrCodeFilename)
+    imageIo = StringIO.new
+    qrCode.write(imageIo)
 
     qrPdf = Prawn::Document.new
-    qrPdf.text "Shipment #{@shipment.exid}"
-    qrPdf.text "#{@shipment.starting_location} to #{@shipment.destination_location}"
-    qrPdf.image qrCodeFilename
-    
-    send_data qrPdf.render(), type: 'application/pdf', disposition: 'attachment'
+    qrPdf.text "Shipment: #{@project.name}", style: :bold, align: :center
+    qrPdf.move_down 10
+    qrPdf.text "From: #{@shipment.starting_location}", style: :bold, align: :center
+    qrPdf.text"To: #{@shipment.destination_location}", style: :bold, align: :center
+    qrPdf.image imageIo, height: 550, width: 550
+
+    send_data qrPdf.render(), type: 'application/pdf', disposition: 'inline'
   end
 
   private
