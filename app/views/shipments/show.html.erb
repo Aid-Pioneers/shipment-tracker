@@ -12,7 +12,7 @@
         <%= link_to edit_shipment_path(@shipment), class: "fw-bold btn btn-outline-secondary" do %>
             <i class="fa-solid fa-pen-to-square"></i> Edit
         <% end %>
-        <%= link_to shipment_qr_path(@shipment), class: "fw-bold btn btn-outline-success" do %>
+        <%= link_to shipment_qr_path(@shipment), class: "fw-bold btn btn-outline-success link-qr-code", target: "_blank", rel: "noopener noreferrer" do %>
           <i class="fa-solid fa-qrcode"></i> QR
         <% end %>
         <%= link_to shipment_path(@shipment), class: "fw-bold btn btn-outline-warning" do %>
