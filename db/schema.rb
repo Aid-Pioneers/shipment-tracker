@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_18_111446) do
+ActiveRecord::Schema.define(version: 2023_03_22_185228) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2022_09_18_111446) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "qr_code_type", default: 0
+    t.boolean "is_complete", default: false
     t.index ["shipment_id"], name: "index_pallets_on_shipment_id"
     t.index ["user_id"], name: "index_pallets_on_user_id"
   end
