@@ -98,38 +98,47 @@
         </div>
       </div>
       <div class="row mt-3">
-        <div class="col-3 text-dark fs-5">Content</div>
-        <div class="col-3 text-dark fs-5">Last Scan</div>
-        <div class="col-3 text-dark fs-5">Location</div>
-        <div class="col-3 text-dark fs-5 text-center">QR Code</div>
+        <div class="col-2 text-dark fs-8">Content</div>
+        <div class="col-2 text-dark fs-8">Last Scan</div>
+        <div class="col-2 text-dark fs-8">Location</div>
+        <div class="col-2 text-dark fs-8">Status</div>
+        <div class="col-2 text-dark fs-8 text-center">QR Code</div>
       </div>
       <% @shipment.pallets.each do |pallet| %>
           <div class="row py-1 border border bg-white rounded-pill mt-2">
-            <div class="col-3 text-secondary fs-6">
+            <div class="col-2 text-secondary fs-9">
               <%= link_to edit_pallet_path(pallet), class: "text-decoration-none text-secondary" do %>
                 <%= pallet.content %>
               <% end %>
             </div>
-            <div class="col-3 text-secondary fs-6">
+            <div class="col-2 text-secondary fs-9">
               <% if pallet.pallet_scans.count.positive? %>
                 <%= pallet.pallet_scans.first.date.strftime("%d.%m.%Y") %>
               <% elsif @shipment.scans.count.positive? %>
                 <%= @shipment.scans.first.date.strftime("%d.%m.%Y") %>
               <% end %>
             </div>
-            <div class="col-3 text-secondary fs-6 text-truncate">
+            <div class="col-2 text-secondary fs-9 text-truncate">
               <% if pallet.pallet_scans.count.positive? %>
                 <%= pallet.pallet_scans.first.location %>
               <% elsif @shipment.scans.count.positive? %>
                 <%= @shipment.scans.first.location %>
               <% end %>
             </div>
-            <div class="col-3 text-secondary fs-6 text-center <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>">
+            <div class="col-2 text-secondary fs-9">
+              <% if pallet.is_complete %>
+                ✅
+              <% else %>
+                ❌
+              <% end %>
+            </div>
+            <div class="col-2 text-secondary fs-9 text-center <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "text-danger" : "text-success" %>">
               <%= link_to pallet_qr_path(pallet), class: "text-decoration-none text-success fw-bold" do %>
                 <%# <%= @shipment.scans.count.positive? && @shipment.scans.first.sticker_destroyed? ? "Destroyed" : "Ok" %>
                 <i class="fa-solid fa-qrcode"></i> QR
               <% end %>
             </div>
+
           </div>
       <% end %>
     </div>
