@@ -7,5 +7,7 @@ class Pallet < ApplicationRecord
 
   validates :content, presence: true
 
+  validates :is_complete, presence: true
+
   enum qr_code_type: [:regular, :authentic_network]
 end
