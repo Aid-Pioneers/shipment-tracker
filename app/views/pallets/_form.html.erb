@@ -8,6 +8,8 @@
     </div>
   <% end %>
   <%= f.association :donor, collection: User.donor, label_method: :full_name, include_blank: false %>
-  <%= f.input :qr_code_type, as: :select, collection: Pallet.qr_code_types.keys.to_a, include_blank: false, label_method: :titleize  %>
+  <% if @pallet.content %>
+    <%= f.input :is_complete, as: :boolean, checked_value: true, unchecked_value: false %>
+  <% end %>
   <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
