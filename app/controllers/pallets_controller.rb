@@ -14,6 +14,7 @@ class PalletsController < ApplicationController
         @pallet = Pallet.new(pallet_params)
         authorize @pallet
         @pallet.shipment = @shipment
+        @pallet.is_complete = false # set is_complete to false by default
         unless @pallet.save
           render :new
           return
@@ -24,6 +25,7 @@ class PalletsController < ApplicationController
       @pallet = Pallet.new(pallet_params)
       authorize @pallet
       @pallet.shipment = @shipment
+      @pallet.is_complete = false # set is_complete to false by default
       if @pallet.save
         redirect_to shipment_path(@shipment)
       else
@@ -68,6 +70,6 @@ class PalletsController < ApplicationController
   end
 
   def pallet_params
-    params.require(:pallet).permit(:user_id, :content, :content_category, :qr_code_type)
+    params.require(:pallet).permit(:user_id, :content, :content_category, :qr_code_type, :is_complete)
   end
 end
