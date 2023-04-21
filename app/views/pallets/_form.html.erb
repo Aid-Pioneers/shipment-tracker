@@ -9,7 +9,7 @@
   <% end %>
   <%= f.association :donor, collection: User.donor, label_method: :full_name, include_blank: false %>
   <% if @pallet.content %>
-    <%= f.input :is_complete, as: :boolean, checked_value: true, unchecked_value: false %>
+    <%= f.input :is_complete, label: 'Mark as complete', as: :boolean %>
   <% end %>
   <%= f.button :submit, class: "btn btn-primary" %>
 <% end %>
