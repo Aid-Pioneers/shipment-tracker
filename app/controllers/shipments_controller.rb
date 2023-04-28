@@ -44,6 +44,8 @@ class ShipmentsController < ApplicationController
     @markers.unshift({ lat: @shipment.start_lat, lng: @shipment.start_lon, image_url: helpers.asset_url("location_start.svg")})
     @markers.push({ lat: @shipment.destination_lat, lng: @shipment.destination_lon, image_url: helpers.asset_url("location_destination.svg")})
 
+    @percent_completed = @shipment.pallets.count > 0 ? ((@shipment.pallets.count{|pallet| pallet.is_complete }.to_f / @shipment.pallets.count) * 100).round : nil
+
     unless @shipment.pallets.nil?
       @markers_pallets = @shipment.pallets.map do |pallet|
         if pallet.pallet_scans.last.nil?
