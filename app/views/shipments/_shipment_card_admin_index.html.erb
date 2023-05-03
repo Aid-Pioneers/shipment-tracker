@@ -9,14 +9,16 @@
         <div class="text-end">
           <%# <div class="px-3 py-1 rounded-pill bg-primary text-primary" style="--bs-bg-opacity: .15;">Active</div> %>
           <div>
-            <% if shipment.status == "in_preparation" %>
-              <p class="px-3 py-1 rounded-pill bg-grey text-text-color fw-bold mb-0" style="--bs-bg-opacity: .15; background-color: #F1F1F1;"> In preparation </p>
-            <% elsif shipment.status == "in_transit" %>
-              <p class="px-3 py-1 rounded-pill bg-primary text-primary fw-bold mb-0" style="--bs-bg-opacity: .15;">Active</p>
-            <% elsif shipment.status == "delivered" %>
-              <p class="px-3 py-1 rounded-pill bg-success text-success fw-bold mb-0" style="--bs-bg-opacity: .15;">Delivered</p>
-            <% elsif shipment.status == "problematic" %>
-              <p class="px-3 py-1 rounded-pill bg-danger text-danger fw-bold mb-0" style="--bs-bg-opacity: .15;">Problem</p>
+            <% if shipment.percent_completed.nil? %>
+              <div class="px-3 py-1 rounded-pill bg-warning text-warning" style="--bs-bg-opacity: .15;">N/A</div>
+            <% else %>
+              <% if shipment.percent_completed == 0 %>
+                <div class="px-3 py-1 rounded-pill bg-secondary text-secondary" style="--bs-bg-opacity: .15;">Preparation <%= shipment.percent_completed %>%</div>
+              <% elsif shipment.percent_completed == 100 %>
+                <div class="px-3 py-1 rounded-pill bg-success text-success" style="--bs-bg-opacity: .15;">Delivered <%= shipment.percent_completed %>%</div>
+              <% else %>
+                <div class="px-3 py-1 rounded-pill bg-warning text-warning" style="--bs-bg-opacity: .15;">Active <%= shipment.percent_completed %>%</div>
+              <% end %>
             <% end %>
           </div>
           <div class="mt-1">

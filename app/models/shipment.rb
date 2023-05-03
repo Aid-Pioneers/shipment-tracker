@@ -26,4 +26,8 @@ class Shipment < ApplicationRecord
       donors.uniq.join(", ")[0..20] + "..."
     end
   end
+
+  def percent_completed
+    self.pallets.count > 0 ? ((self.pallets.count{|pallet| pallet.is_complete }.to_f / self.pallets.count) * 100).round : nil
+  end
 end
