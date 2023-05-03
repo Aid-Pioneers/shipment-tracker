@@ -26,15 +26,15 @@
             <div class="text-dark fw-bold fs-4"><%= @shipment.id %></div>
           </div>
           <div class="text-end">
-            <% if @percent_completed.nil? %>
+            <% if @shipment.percent_completed.nil? %>
               <div class="px-3 py-1 rounded-pill bg-warning text-warning" style="--bs-bg-opacity: .15;">N/A</div>
             <% else %>
-              <% if @percent_completed == 0 %>
-                <div class="px-3 py-1 rounded-pill bg-secondary text-secondary" style="--bs-bg-opacity: .15;">Preparation <%= @percent_completed %>%</div>
-              <% elsif @percent_completed == 100 %>
-                <div class="px-3 py-1 rounded-pill bg-success text-success" style="--bs-bg-opacity: .15;">Delivered <%= @percent_completed %>%</div>
+              <% if @shipment.percent_completed == 0 %>
+                <div class="px-3 py-1 rounded-pill bg-secondary text-secondary" style="--bs-bg-opacity: .15;">Preparation <%= @shipment.percent_completed %>%</div>
+              <% elsif @shipment.percent_completed == 100 %>
+                <div class="px-3 py-1 rounded-pill bg-success text-success" style="--bs-bg-opacity: .15;">Delivered <%= @shipment.percent_completed %>%</div>
               <% else %>
-                <div class="px-3 py-1 rounded-pill bg-warning text-warning" style="--bs-bg-opacity: .15;">Active <%= @percent_completed %>%</div>
+                <div class="px-3 py-1 rounded-pill bg-warning text-warning" style="--bs-bg-opacity: .15;">Active <%= @shipment.percent_completed %>%</div>
               <% end %>
             <% end %>
             <div class="text-secondary mt-1"><%= @shipment.pallets.count %> pallets</div>
