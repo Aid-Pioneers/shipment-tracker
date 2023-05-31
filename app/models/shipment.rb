@@ -28,6 +28,6 @@ class Shipment < ApplicationRecord
   end
 
   def percent_completed
-    self.pallets.count > 0 ? ((self.pallets.count{|pallet| pallet.is_complete }.to_f / self.pallets.count) * 100).round : nil
+    self.pallets.count > 0 ? ((self.pallets.count{|pallet| pallet.is_complete? }.to_f / self.pallets.count) * 100).round : nil
   end
 end
